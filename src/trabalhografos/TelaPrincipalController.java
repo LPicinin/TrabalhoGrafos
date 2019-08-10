@@ -5,51 +5,58 @@
  */
 package trabalhografos;
 
-import com.jfoenix.controls.JFXButton;
+import Classes.Aresta;
+import Classes.Vertice;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 /**
  *
  * @author Aluno
  */
-public class TelaPrincipalController implements Initializable {
-    
-    private Label label;
+public class TelaPrincipalController implements Initializable
+{
+    public static List<Vertice> vertices;
+    public static List<Aresta> arestas;
     @FXML
-    private TableView<?> tbMA;
+    private TableView<ObservableList> tbMA;
     @FXML
-    private TableView<?> tbMI;
+    private TableView<ObservableList> tbMI;
     @FXML
-    private TableView<?> tbLista;
+    private TableView<ObservableList> tbLista;
     @FXML
     private Pane painel;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    public static Pane painelAcessivel;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        arestas = new ArrayList<Aresta>();
+        vertices = new ArrayList<Vertice>();
+        painelAcessivel = painel;
+    }
 
     @FXML
-    private void evtClkMouse(MouseEvent event) 
+    private void evtClkMouse(MouseEvent event)
     {
-        JFXButton jb = new JFXButton("0");
-        jb.setLayoutX(event.getX());
-        jb.setLayoutY(event.getY());
+        Vertice jb = new Vertice(getNextNumberVertice().toString());
+        jb.setLayoutX(event.getSceneX() - jb.getPrefWidth() / 2 - 15);
+        jb.setLayoutY(event.getSceneY() - jb.getPrefHeight() / 2 - 80);
+        
+        vertices.add(jb);
         painel.getChildren().add(jb);
     }
-    
+    private Integer getNextNumberVertice()
+    {
+        return vertices.size()+1;
+    }
 }
