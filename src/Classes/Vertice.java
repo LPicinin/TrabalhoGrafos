@@ -75,6 +75,10 @@ public class Vertice extends JFXButton
                 }
                 if (event.getButton().equals(MouseButton.SECONDARY))
                 {
+                    
+                    TelaPrincipalController.vertices.remove(this);
+                    TelaPrincipalController.painelAcessivel.getChildren().remove(this);
+                    /*
                     int i;
                     for (i = 0; i < TelaPrincipalController.vertices.size(); i++)
                     {
@@ -84,7 +88,7 @@ public class Vertice extends JFXButton
                             TelaPrincipalController.painelAcessivel.getChildren().remove(i);
                             i = TelaPrincipalController.vertices.size();
                         }
-                    }
+                    }*/
                 }
             }
         });
