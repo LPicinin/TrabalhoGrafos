@@ -87,8 +87,9 @@ public class Aresta extends Line
         rotulo.setLayoutX((v1.getLayoutX() + v2.getLayoutX())/2);
         rotulo.setLayoutY((v1.getLayoutY() + v2.getLayoutY())/2);
         
-        cabeca.setLayoutX(getEndX());
-        cabeca.setLayoutY(getEndY());
+        
+        cabeca.setLayoutX(getEndX()-(getEndX() - getStartX())/8);
+        cabeca.setLayoutY(getEndY()-(getEndY() - getStartY())/8);
         cabeca.setVisible(!TelaPrincipalController.isGrafo());
     }
     public void dispose()
