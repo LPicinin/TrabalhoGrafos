@@ -6,7 +6,9 @@
 package Classes;
 
 import com.jfoenix.controls.JFXButton;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.event.EventHandler;
@@ -58,9 +60,9 @@ public class Vertice extends JFXButton
             @Override
             public void handle(MouseEvent event)
             {
-                System.out.println("Click Detectado ID:" + Integer.toString(id));
                 if (event.getButton().equals(MouseButton.MIDDLE))
                 {
+                    System.out.println("Click ligação ID:" + Integer.toString(id));
                     if (TelaPrincipalController.vaux == null)
                     {
                         TelaPrincipalController.vaux = buscaId(id);
@@ -75,10 +77,14 @@ public class Vertice extends JFXButton
                 }
                 if (event.getButton().equals(MouseButton.SECONDARY))
                 {
-                    
+                    System.out.println("Click exclusão ID:" + Integer.toString(id));
+                    dispose();
+                    /*
+                    System.out.println(TelaPrincipalController.vertices.indexOf(this));
                     TelaPrincipalController.vertices.remove(this);
                     TelaPrincipalController.painelAcessivel.getChildren().remove(this);
-                    /*
+                     */
+ /*
                     int i;
                     for (i = 0; i < TelaPrincipalController.vertices.size(); i++)
                     {
@@ -108,10 +114,10 @@ public class Vertice extends JFXButton
     public boolean equals(Object obj)
     {
         boolean f = false;
-        if (obj instanceof JFXButton)
+        if (obj instanceof Vertice)
         {
-            JFXButton aux = (JFXButton) obj;
-            f = getText().equals(aux.getText());
+            Vertice aux = (Vertice) obj;
+            f = this.id == aux.id;
         }
         return f;
     }
@@ -143,4 +149,38 @@ public class Vertice extends JFXButton
         this.id = id;
     }
 
+    public void dispose()
+    {
+        Vertice v;
+        for (int i = 0; i < TelaPrincipalController.vertices.size(); i++)
+        {
+            v = TelaPrincipalController.vertices.get(i);
+            if (v.getID() == getID())
+            {
+                TelaPrincipalController.vertices.remove(v);
+            }
+        }
+        ObservableList<Node> obAux = TelaPrincipalController.painelAcessivel.getChildren();
+        for (int i = 0; i < obAux.size(); i++)
+        {
+            Node vc = obAux.get(i);
+            if (vc instanceof Vertice)
+            {
+                if(((Vertice)vc).getID() == getID())
+                    obAux.remove(vc);
+            }
+        }
+        
+        List<Aresta> arestas = TelaPrincipalController.arestas;
+        List<Aresta> MarcadosParaRemocao = new ArrayList<>();
+        for (Aresta aresta : arestas)
+        {
+            if(aresta.getV1().getID() == this.id || aresta.getV2().getID() == this.id)
+                MarcadosParaRemocao.add(aresta);
+        }
+        for (Aresta aresta : MarcadosParaRemocao)
+        {
+            aresta.dispose();
+        }
+    }
 }

@@ -5,7 +5,11 @@
  */
 package Classes;
 
+import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.shape.Line;
+import trabalhografos.TelaPrincipalController;
 
 /**
  *
@@ -69,5 +73,12 @@ public class Aresta extends Line
         rotulo.setLayoutX((v1.getLayoutX() + v2.getLayoutX())/2);
         rotulo.setLayoutY((v1.getLayoutY() + v2.getLayoutY())/2);
     }
-    
+    public void dispose()
+    {
+        ObservableList<Node> ob = TelaPrincipalController.painelAcessivel.getChildren();
+        List<Aresta> ar = TelaPrincipalController.arestas;
+        rotulo.dispose();
+        ob.remove(this);
+        ar.remove(this);
+    }
 }
