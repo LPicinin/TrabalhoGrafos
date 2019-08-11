@@ -25,6 +25,10 @@ import javafx.scene.layout.Pane;
  */
 public class TelaPrincipalController implements Initializable
 {
+    //para o controle de ligações entre 2 vertices
+    public static Vertice vaux;
+    
+    //para o controle do grafo
     public static List<Vertice> vertices;
     public static List<Aresta> arestas;
     @FXML
@@ -55,8 +59,18 @@ public class TelaPrincipalController implements Initializable
         vertices.add(jb);
         painel.getChildren().add(jb);
     }
+    
+    //problema
     private Integer getNextNumberVertice()
     {
-        return vertices.size()+1;
+        int s = vertices.size();
+        boolean flag = true;
+        int i = s;
+        for (; i-1 > 0 && flag; i--)
+        {
+            if(vertices.get(i-1).getID()-1 != vertices.get(i-2).getID())
+                flag = false;
+        }
+        return (flag)? vertices.size() : i;
     }
 }

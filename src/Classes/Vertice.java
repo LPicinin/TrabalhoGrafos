@@ -6,6 +6,7 @@
 package Classes;
 
 import com.jfoenix.controls.JFXButton;
+import java.util.List;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.event.EventHandler;
@@ -41,6 +42,7 @@ public class Vertice extends JFXButton
             @Override
             public void handle(MouseEvent event)
             {
+                System.out.println("Drag Detectado ID:" + Integer.toString(id));
                 setLayoutX(event.getSceneX() - getPrefWidth() / 2 - 15);
                 setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
             }
@@ -50,9 +52,24 @@ public class Vertice extends JFXButton
             @Override
             public void handle(MouseEvent event)
             {
+                System.out.println("Click Detectado ID:" + Integer.toString(id));
+                if (event.getButton().equals(MouseButton.PRIMARY))
+                {
+                    if (TelaPrincipalController.vaux == null)
+                    {
+                        TelaPrincipalController.vaux = buscaId(id);
+                    }
+                    else
+                    {
+                        Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
+                        TelaPrincipalController.arestas.add(ar);
+                        TelaPrincipalController.painelAcessivel.getChildren().add(ar);
+                        TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
+                        TelaPrincipalController.vaux = null;
+                    }
+                }
                 if (event.getButton().equals(MouseButton.SECONDARY))
                 {
-                    System.out.println("Hum");
                     int i;
                     for (i = 0; i < TelaPrincipalController.vertices.size(); i++)
                     {
@@ -67,7 +84,15 @@ public class Vertice extends JFXButton
             }
         });
     }
-
+    private Vertice buscaId(int id)
+    {
+        List<Vertice> vts = TelaPrincipalController.vertices;
+        int i;
+        for (i = 0; i < vts.size() && vts.get(i).getID() != id; i++)
+        {
+        }
+        return vts.get(i);
+    }
     @Override
     public boolean equals(Object obj)
     {
@@ -91,10 +116,20 @@ public class Vertice extends JFXButton
     private void iniciaInfos()
     {
         setFocusTraversable(false);
-        setStyle("-fx-padding: 10;\n" +
-                "-fx-background-color: gray;\n" +
-                "-fx-border-radius: 30 30 30 30;"
+        setStyle("-fx-padding: 10;\n"
+                + "-fx-background-color: gray;\n"
+                + "-fx-border-radius: 30 30 30 30;"
                 + "");
+    }
+
+    public int getID()
+    {
+        return id;
+    }
+
+    public void setID(int id)
+    {
+        this.id = id;
     }
 
 }
