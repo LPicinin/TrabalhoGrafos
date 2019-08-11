@@ -35,7 +35,8 @@ public class Rotulo extends Label
             @Override
             public void handle(MouseEvent event)
             {
-                setText(Integer.toString(Integer.parseInt(getText())+1));
+                if(event.getButton().equals(MouseButton.MIDDLE))
+                    setText(Integer.toString(Integer.parseInt(getText())+1));
             }
         });
     }

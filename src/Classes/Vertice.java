@@ -42,11 +42,15 @@ public class Vertice extends JFXButton
             @Override
             public void handle(MouseEvent event)
             {
-                System.out.println("Drag Detectado ID:" + Integer.toString(id));
-                setLayoutX(event.getSceneX() - getPrefWidth() / 2 - 15);
-                setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
-                
-                TelaPrincipalController.recalcularArestas();
+                if (event.getButton().equals(MouseButton.PRIMARY))
+                {
+                    System.out.println("Drag Detectado ID:" + Integer.toString(id));
+                    setLayoutX(event.getSceneX() - getPrefWidth() / 2 - 15);
+                    setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
+
+                    TelaPrincipalController.recalcularArestas();
+                }
+
             }
         });
         this.setOnMouseClicked(new EventHandler<MouseEvent>()
@@ -55,13 +59,12 @@ public class Vertice extends JFXButton
             public void handle(MouseEvent event)
             {
                 System.out.println("Click Detectado ID:" + Integer.toString(id));
-                if (event.getButton().equals(MouseButton.PRIMARY))
+                if (event.getButton().equals(MouseButton.MIDDLE))
                 {
                     if (TelaPrincipalController.vaux == null)
                     {
                         TelaPrincipalController.vaux = buscaId(id);
-                    }
-                    else
+                    } else
                     {
                         Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
                         TelaPrincipalController.arestas.add(ar);
@@ -86,6 +89,7 @@ public class Vertice extends JFXButton
             }
         });
     }
+
     private Vertice buscaId(int id)
     {
         List<Vertice> vts = TelaPrincipalController.vertices;
@@ -95,6 +99,7 @@ public class Vertice extends JFXButton
         }
         return vts.get(i);
     }
+
     @Override
     public boolean equals(Object obj)
     {

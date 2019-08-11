@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -25,9 +26,10 @@ import javafx.scene.layout.Pane;
  */
 public class TelaPrincipalController implements Initializable
 {
+
     //para o controle de ligações entre 2 vertices
     public static Vertice vaux;
-    
+
     //para o controle do grafo
     public static List<Vertice> vertices;
     public static List<Aresta> arestas;
@@ -52,27 +54,32 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private void evtClkMouse(MouseEvent event)
     {
-        Vertice jb = new Vertice(getNextNumberVertice().toString());
-        jb.setLayoutX(event.getSceneX() - jb.getPrefWidth() / 2 - 15);
-        jb.setLayoutY(event.getSceneY() - jb.getPrefHeight() / 2 - 80);
-        
-        vertices.add(jb);
-        painel.getChildren().add(jb);
+        if (event.getButton().equals(MouseButton.PRIMARY))
+        {
+            Vertice jb = new Vertice(getNextNumberVertice().toString());
+            jb.setLayoutX(event.getSceneX() - jb.getPrefWidth() / 2 - 15);
+            jb.setLayoutY(event.getSceneY() - jb.getPrefHeight() / 2 - 80);
+            vertices.add(jb);
+            painel.getChildren().add(jb);
+        }
     }
-    
+
     //problema
     private Integer getNextNumberVertice()
     {
         int s = vertices.size();
         boolean flag = true;
         int i = s;
-        for (; i-1 > 0 && flag; i--)
+        for (; i - 1 > 0 && flag; i--)
         {
-            if(vertices.get(i-1).getID()-1 != vertices.get(i-2).getID())
+            if (vertices.get(i - 1).getID() - 1 != vertices.get(i - 2).getID())
+            {
                 flag = false;
+            }
         }
-        return (flag)? vertices.size() : i;
+        return (flag) ? vertices.size() : i;
     }
+
     public static void recalcularArestas()
     {
         for (int i = 0; i < arestas.size(); i++)
