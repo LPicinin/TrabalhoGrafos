@@ -32,7 +32,7 @@ public class Aresta extends Line
         this.rotulo = new Rotulo(rotulo);
         this.v1 = v1;
         this.v2 = v2;
-        cabeca = new Circle(v2.getLayoutX(), v2.getLayoutY(), 3, Paint.valueOf("ffffff"));
+        cabeca = new Circle(3,  Paint.valueOf("ffffff"));//Circle(v2.getLayoutX(), v2.getLayoutY(), 3, Paint.valueOf("ffffff"));
         calcPos();
     }
 
