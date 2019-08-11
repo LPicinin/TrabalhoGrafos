@@ -45,6 +45,8 @@ public class Vertice extends JFXButton
                 System.out.println("Drag Detectado ID:" + Integer.toString(id));
                 setLayoutX(event.getSceneX() - getPrefWidth() / 2 - 15);
                 setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
+                
+                TelaPrincipalController.recalcularArestas();
             }
         });
         this.setOnMouseClicked(new EventHandler<MouseEvent>()

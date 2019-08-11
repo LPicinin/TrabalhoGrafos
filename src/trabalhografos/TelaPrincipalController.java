@@ -73,4 +73,11 @@ public class TelaPrincipalController implements Initializable
         }
         return (flag)? vertices.size() : i;
     }
+    public static void recalcularArestas()
+    {
+        for (int i = 0; i < arestas.size(); i++)
+        {
+            arestas.get(i).calcPos();
+        }
+    }
 }
