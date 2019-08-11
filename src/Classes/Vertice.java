@@ -5,6 +5,7 @@
  */
 package Classes;
 
+import Util.Arrow;
 import com.jfoenix.controls.JFXButton;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,9 +70,14 @@ public class Vertice extends JFXButton
                     } else
                     {
                         Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
+                        //Arrow seta = new Arrow(TelaPrincipalController.vaux.getLayoutX(), TelaPrincipalController.vaux.getLayoutY(), getLayoutX(), getLayoutY(), 0);
+                        //TelaPrincipalController.painelAcessivel.getChildren().add(seta);
+                        
                         TelaPrincipalController.arestas.add(ar);
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar);
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
+                        TelaPrincipalController.painelAcessivel.getChildren().add(ar.getCabeca());
+                        
                         TelaPrincipalController.vaux = null;
                     }
                 }

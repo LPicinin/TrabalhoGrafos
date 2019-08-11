@@ -8,6 +8,8 @@ package Classes;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import trabalhografos.TelaPrincipalController;
 
@@ -17,6 +19,7 @@ import trabalhografos.TelaPrincipalController;
  */
 public class Aresta extends Line
 {
+    private Circle cabeca;
     private Rotulo rotulo;
     private Vertice v1;
     private Vertice v2;
@@ -29,6 +32,7 @@ public class Aresta extends Line
         this.rotulo = new Rotulo(rotulo);
         this.v1 = v1;
         this.v2 = v2;
+        cabeca = new Circle(v2.getLayoutX(), v2.getLayoutY(), 3, Paint.valueOf("ffffff"));
         calcPos();
     }
 
@@ -62,6 +66,16 @@ public class Aresta extends Line
         this.v2 = v2;
     }
 
+    public Circle getCabeca()
+    {
+        return cabeca;
+    }
+
+    public void setCabeca(Circle cabeca)
+    {
+        this.cabeca = cabeca;
+    }
+
     public void calcPos()
     {
         setStartX(v1.getLayoutX());
@@ -72,12 +86,17 @@ public class Aresta extends Line
         
         rotulo.setLayoutX((v1.getLayoutX() + v2.getLayoutX())/2);
         rotulo.setLayoutY((v1.getLayoutY() + v2.getLayoutY())/2);
+        
+        cabeca.setLayoutX(getEndX());
+        cabeca.setLayoutY(getEndY());
+        cabeca.setVisible(!TelaPrincipalController.isGrafo());
     }
     public void dispose()
     {
         ObservableList<Node> ob = TelaPrincipalController.painelAcessivel.getChildren();
         List<Aresta> ar = TelaPrincipalController.arestas;
         rotulo.dispose();
+        ob.remove(cabeca);
         ob.remove(this);
         ar.remove(this);
     }

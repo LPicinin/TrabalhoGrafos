@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -47,4 +49,16 @@
    <center>
       <Pane fx:id="painel" onMouseClicked="#evtClkMouse" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <right>
+      <VBox prefHeight="339.0" prefWidth="99.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXRadioButton fx:id="rbGrafo" focusTraversable="false" onMouseClicked="#evtGrafo" selected="true" text="Grafo">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuOP" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton fx:id="rbDrigrafo" focusTraversable="false" onMouseClicked="#evtDigrafo" text="Digrafo" toggleGroup="$menuOP" />
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

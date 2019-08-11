@@ -7,6 +7,7 @@ package trabalhografos;
 
 import Classes.Aresta;
 import Classes.Vertice;
+import com.jfoenix.controls.JFXRadioButton;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 /**
  *
@@ -26,7 +30,7 @@ import javafx.scene.layout.Pane;
  */
 public class TelaPrincipalController implements Initializable
 {
-
+    private static boolean grafo;//Digrafo ou grafo
     //para o controle de ligações entre 2 vertices
     public static Vertice vaux;
 
@@ -42,6 +46,12 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private Pane painel;
     public static Pane painelAcessivel;
+    @FXML
+    private JFXRadioButton rbGrafo;
+    @FXML
+    private ToggleGroup menuOP;
+    @FXML
+    private JFXRadioButton rbDrigrafo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -49,6 +59,7 @@ public class TelaPrincipalController implements Initializable
         arestas = new ArrayList<Aresta>();
         vertices = new ArrayList<Vertice>();
         painelAcessivel = painel;
+        grafo = true;
     }
 
     @FXML
@@ -87,4 +98,44 @@ public class TelaPrincipalController implements Initializable
             arestas.get(i).calcPos();
         }
     }
+
+    @FXML
+    private void evtGrafo(MouseEvent event)
+    {
+        grafo = true;
+        recalcularArestas();
+    }
+
+    @FXML
+    private void evtDigrafo(MouseEvent event)
+    {
+        grafo = false;
+        recalcularArestas();
+    }
+
+    public static boolean isGrafo()
+    {
+        return grafo;
+    }
+
+    public static Vertice getVaux()
+    {
+        return vaux;
+    }
+
+    public static List<Vertice> getVertices()
+    {
+        return vertices;
+    }
+
+    public static List<Aresta> getArestas()
+    {
+        return arestas;
+    }
+
+    public static Pane getPainelAcessivel()
+    {
+        return painelAcessivel;
+    }
+    
 }
