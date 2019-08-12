@@ -21,6 +21,26 @@ public class Recursao extends CubicCurve
     {
         rotulo = new Rotulo(rot);
         this.v = v;
+        
+        /**/
+        double x = v.getLayoutX();
+        double y = v.getLayoutY();
+        double w = v.getWidth();
+        double h = v.getHeight();
+        y += h;
+        
+        setStartX(x+w/h);
+        setStartY(y);
+        
+        setEndX(x+w);
+        setEndY(y);
+        
+        setControlX1(y+50);
+        setControlX2(y+50);
+        
+        setControlY1(x-50);
+        setControlY2(x-50);
+        /**/
         calcPos();
         
     }
@@ -37,20 +57,8 @@ public class Recursao extends CubicCurve
         double w = v.getWidth();
         double h = v.getHeight();
         
-        
-        y += h;
-        
-        setStartX(x+w/h);
-        setStartY(y);
-        
-        setEndX(x+w);
-        setEndY(y);
-        
-        setControlX1(y+5);
-        setControlX2(y+5);
-        
-        setControlY1(x-30);
-        setControlY2(x-30);
+        setLayoutX(x);
+        setLayoutY(y);
         
     }
 }
