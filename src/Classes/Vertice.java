@@ -45,6 +45,7 @@ public class Vertice extends JFXButton
                     setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
 
                     TelaPrincipalController.recalcularArestas();
+                    TelaPrincipalController.processaEstruturas();
                 }
 
             }

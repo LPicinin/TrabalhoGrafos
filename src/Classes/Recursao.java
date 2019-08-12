@@ -5,14 +5,14 @@
  */
 package Classes;
 
-import javafx.scene.shape.CubicCurve;
+import javafx.scene.shape.QuadCurve;
 import trabalhografos.TelaPrincipalController;
 
 /**
  *
  * @author Aluno
  */
-public class Recursao extends CubicCurve
+public class Recursao extends QuadCurve
 {
     private Rotulo rotulo;
     private Vertice v;
@@ -29,17 +29,14 @@ public class Recursao extends CubicCurve
         double h = v.getHeight();
         y += h;
         
-        setStartX(x+w/h);
-        setStartY(y);
+        setStartX(-65);
+        setStartY(-70);
         
-        setEndX(x+w);
-        setEndY(y);
+        setEndX(-30);
+        setEndY(-70);
         
-        setControlX1(y+50);
-        setControlX2(y+50);
-        
-        setControlY1(x-50);
-        setControlY2(x-50);
+        setControlX(-45);
+        setControlY(-24);
         /**/
         calcPos();
         

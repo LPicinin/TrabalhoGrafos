@@ -6,13 +6,18 @@
 package trabalhografos;
 
 import Classes.Aresta;
+import Classes.Grafo;
 import Classes.Recursao;
 import Classes.Vertice;
+import Util.Util;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +33,7 @@ import javafx.scene.layout.Pane;
  */
 public class TelaPrincipalController implements Initializable
 {
+    private static Grafo gf;
     private static boolean grafo;//Digrafo ou grafo
     //para o controle de ligações entre 2 vertices
     public static Vertice vaux;
@@ -37,12 +43,6 @@ public class TelaPrincipalController implements Initializable
     public static List<Aresta> arestas;
     public static List<Recursao> recursidade;
     @FXML
-    private TableView<ObservableList> tbMA;
-    @FXML
-    private TableView<ObservableList> tbMI;
-    @FXML
-    private TableView<ObservableList> tbLista;
-    @FXML
     private Pane painel;
     public static Pane painelAcessivel;
     @FXML
@@ -51,6 +51,13 @@ public class TelaPrincipalController implements Initializable
     private ToggleGroup menuOP;
     @FXML
     private JFXRadioButton rbDrigrafo;
+    @FXML
+    private JFXTextArea txMA;
+    private static JFXTextArea stxMA;
+    @FXML
+    private JFXTextArea txMI;
+    @FXML
+    private JFXTextArea txLista;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -60,6 +67,8 @@ public class TelaPrincipalController implements Initializable
         recursidade = new ArrayList<Recursao>();
         painelAcessivel = painel;
         grafo = true;
+        gf = new Grafo(vertices, arestas);
+        stxMA = txMA;
     }
 
     @FXML
@@ -73,6 +82,7 @@ public class TelaPrincipalController implements Initializable
             vertices.add(jb);
             painel.getChildren().add(jb);
         }
+        processaEstruturas();
     }
 
     //problema
@@ -139,6 +149,38 @@ public class TelaPrincipalController implements Initializable
     public static Pane getPainelAcessivel()
     {
         return painelAcessivel;
+    }
+
+    public static void processaEstruturas() 
+    {
+        int[][] ma = gf.getMatrizAdjacencia();
+        System.out.println(Arrays.deepToString(ma));
+        List<String> lr = gf.getListaRotulos();
+        String saidaMA = "[-]\t"+lr.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
+        for (int i = 0; i < ma.length; i++) 
+        {
+            saidaMA += "["+lr.get(i)+"]\t";
+            for (int j = 0; j < ma[0].length; j++) 
+            {
+                //saidaMA += Integer.toString(ma[i][j]);
+                saidaMA += ma[i][j]+" ";
+            }
+            saidaMA+="\n";
+        }
+        stxMA.setText(saidaMA);
+        /*System.out.println(ma.length + " " + ma[0].length);
+        for (int[] ma1 : ma) {
+            Util.addLinha(stbMA, Arrays.asList(ma1));
+        }*/
+        /*
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("5");
+        l.add(" ");
+        Util.addLinha(stbMA, l);
+        l = new ArrayList<String>();
+        l.add(" ");
+        l.add("3");
+        Util.addLinha(stbMA, l);*/
     }
     
 }

@@ -40,7 +40,10 @@ public class Aresta extends Line
     {
         return rotulo;
     }
-
+    public int getValor()
+    {
+        return Integer.parseInt(rotulo.getText());
+    }
     public void setRotulo(Rotulo rotulo)
     {
         this.rotulo = rotulo;

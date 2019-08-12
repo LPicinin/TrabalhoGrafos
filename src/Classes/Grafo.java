@@ -5,7 +5,9 @@
  */
 package Classes;
 
+import java.util.ArrayList;
 import java.util.List;
+import trabalhografos.TelaPrincipalController;
 
 /**
  *
@@ -21,9 +23,24 @@ public class Grafo
         this.vertices = vertices;
         this.arestas = arestas;
     }
-    public Integer[][] getMatrizAdjacencia()
+    public int[][] getMatrizAdjacencia()
     {
-        return null;
+        Vertice or;
+        Vertice dst;
+        int [][]ma = new int[vertices.size()][vertices.size()];
+        for (Aresta a : arestas) {
+            or = a.getV1();
+            dst = a.getV2();
+            ma[or.getID()][dst.getID()] = a.getValor();
+            if(TelaPrincipalController.isGrafo())
+                ma[dst.getID()][or.getID()] = a.getValor();
+        }
+        /*for (int i = 0; i < arestas.size(); i++) {
+            for (int j = 0; j < arestas.size(); j++) {
+                
+            }
+        }*/
+        return ma;
     }
     public Integer[][] getMatrizIncidencia()
     {
@@ -32,5 +49,13 @@ public class Grafo
     public List<?> getListaAdjacência()
     {
         return null;
+    }
+    public List<String> getListaRotulos()
+    {
+        List<String> la = new ArrayList<>();
+        for (Vertice vertice : vertices) {
+            la.add(Integer.toString(vertice.getID()));
+        }
+        return la;
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,19 +17,19 @@
             <VBox alignment="TOP_CENTER">
                <children>
                   <Label text="MA" />
-                  <TableView fx:id="tbMA" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <JFXTextArea fx:id="txMA" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER">
                <children>
                   <Label text="MI" />
-                  <TableView fx:id="tbMI" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <JFXTextArea fx:id="txMI" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER">
                <children>
                   <Label text="Lista" />
-                  <TableView fx:id="tbLista" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <JFXTextArea fx:id="txLista" prefWidth="200.0" />
                </children>
             </VBox>
          </children>
