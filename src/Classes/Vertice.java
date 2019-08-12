@@ -62,7 +62,7 @@ public class Vertice extends JFXButton
                         TelaPrincipalController.vaux = buscaId(id);
                     } else if(TelaPrincipalController.vaux.getID() != getID())//não é recursao
                     {
-                        Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
+                        Aresta ar = new Aresta("0", TelaPrincipalController.vaux, buscaId(id));
                         //Arrow seta = new Arrow(TelaPrincipalController.vaux.getLayoutX(), TelaPrincipalController.vaux.getLayoutY(), getLayoutX(), getLayoutY(), 0);
                         //TelaPrincipalController.painelAcessivel.getChildren().add(seta);
                         
