@@ -6,6 +6,7 @@
 package trabalhografos;
 
 import Classes.Aresta;
+import Classes.Recursao;
 import Classes.Vertice;
 import com.jfoenix.controls.JFXRadioButton;
 import java.net.URL;
@@ -15,14 +16,11 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 
 /**
  *
@@ -37,6 +35,7 @@ public class TelaPrincipalController implements Initializable
     //para o controle do grafo
     public static List<Vertice> vertices;
     public static List<Aresta> arestas;
+    public static List<Recursao> recursidade;
     @FXML
     private TableView<ObservableList> tbMA;
     @FXML
@@ -58,6 +57,7 @@ public class TelaPrincipalController implements Initializable
     {
         arestas = new ArrayList<Aresta>();
         vertices = new ArrayList<Vertice>();
+        recursidade = new ArrayList<Recursao>();
         painelAcessivel = painel;
         grafo = true;
     }
@@ -96,6 +96,9 @@ public class TelaPrincipalController implements Initializable
         for (int i = 0; i < arestas.size(); i++)
         {
             arestas.get(i).calcPos();
+        }
+        for (Recursao recursao : recursidade) {
+            recursao.calcPos();
         }
     }
 

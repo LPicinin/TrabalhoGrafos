@@ -5,20 +5,13 @@
  */
 package Classes;
 
-import Util.Arrow;
 import com.jfoenix.controls.JFXButton;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.input.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import trabalhografos.TelaPrincipalController;
 
 /**
@@ -67,7 +60,7 @@ public class Vertice extends JFXButton
                     if (TelaPrincipalController.vaux == null)
                     {
                         TelaPrincipalController.vaux = buscaId(id);
-                    } else
+                    } else if(TelaPrincipalController.vaux.getID() != getID())//não é recursao
                     {
                         Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
                         //Arrow seta = new Arrow(TelaPrincipalController.vaux.getLayoutX(), TelaPrincipalController.vaux.getLayoutY(), getLayoutX(), getLayoutY(), 0);
@@ -78,6 +71,13 @@ public class Vertice extends JFXButton
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar.getCabeca());
                         
+                        TelaPrincipalController.vaux = null;
+                    }
+                    else//recursao
+                    {
+                        Recursao rec = new Recursao(TelaPrincipalController.vaux, "0");
+                        TelaPrincipalController.recursidade.add(rec);
+                        TelaPrincipalController.painelAcessivel.getChildren().add(rec);
                         TelaPrincipalController.vaux = null;
                     }
                 }
