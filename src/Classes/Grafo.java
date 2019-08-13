@@ -115,9 +115,14 @@ public class Grafo
     
     public List<List<String>> getListaAdjacencia()
     {
-        List<List<String>> ll = new ArrayList<>();
+        List<List<String>> ll = new ArrayList<>(vertices.size());
         List<String> linha;
+        for (Aresta aresta : arestas)
+        {
+            linha = new ArrayList<>();
+            
+        }
         
-        return null;
+        return ll;
     }
 }
