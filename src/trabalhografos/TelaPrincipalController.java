@@ -57,6 +57,7 @@ public class TelaPrincipalController implements Initializable
     private static JFXTextArea stxMA;
     @FXML
     private JFXTextArea txMI;
+    private static JFXTextArea stxMI;
     @FXML
     private JFXTextArea txLista;
 
@@ -68,8 +69,9 @@ public class TelaPrincipalController implements Initializable
         recursidade = new ArrayList<Recursao>();
         painelAcessivel = painel;
         grafo = true;
-        gf = new Grafo(vertices, arestas);
+        gf = new Grafo(vertices, arestas, recursidade);
         stxMA = txMA;
+        stxMI = txMI;
         sequencia = 0;
     }
 
@@ -157,7 +159,7 @@ public class TelaPrincipalController implements Initializable
     public static void processaEstruturas() 
     {
         int[][] ma = gf.getMatrizAdjacencia();
-        System.out.println(Arrays.deepToString(ma));
+        //System.out.println(Arrays.deepToString(ma));
         List<String> lr = gf.getListaRotulos();
         String saidaMA = "[-]\t"+lr.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
         for (int i = 0; i < ma.length; i++) 
@@ -171,19 +173,24 @@ public class TelaPrincipalController implements Initializable
             saidaMA+="\n";
         }
         stxMA.setText(saidaMA);
-        /*System.out.println(ma.length + " " + ma[0].length);
-        for (int[] ma1 : ma) {
-            Util.addLinha(stbMA, Arrays.asList(ma1));
-        }*/
-        /*
-        ArrayList<String> l = new ArrayList<String>();
-        l.add("5");
-        l.add(" ");
-        Util.addLinha(stbMA, l);
-        l = new ArrayList<String>();
-        l.add(" ");
-        l.add("3");
-        Util.addLinha(stbMA, l);*/
+        
+        /////////////////////////////////////////////////
+        int[][] mi = gf.getMatrizIncidencia();
+        List<String> lr2 = gf.getListaRotulosMI();
+        if(arestas.size() > 0)
+        {
+            saidaMA = "[-]\t"+lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
+            for (int i = 0; i < mi.length; i++) {
+                saidaMA += "["+lr.get(i)+"]\t";
+                for (int j = 0; j < mi[0].length; j++) 
+                {
+                    saidaMA += mi[i][j]+"\t";
+                }
+                saidaMA+="\n";
+            }
+            stxMI.setText(saidaMA);
+        }
+        
     }
     
 }

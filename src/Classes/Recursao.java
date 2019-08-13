@@ -49,6 +49,14 @@ public class Recursao extends QuadCurve
         return rotulo;
     }
     
+    public int getValor()
+    {
+        return Integer.parseInt(rotulo.getText());
+    }
+
+    public Vertice getV() {
+        return v;
+    }
     
     
     public void dispose()

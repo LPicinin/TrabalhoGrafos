@@ -84,6 +84,7 @@ public class Vertice extends JFXButton
                         TelaPrincipalController.painelAcessivel.getChildren().add(rec.getRotulo());
                         TelaPrincipalController.vaux = null;
                     }
+                    TelaPrincipalController.processaEstruturas();
                 }
                 if (event.getButton().equals(MouseButton.SECONDARY))
                 {
