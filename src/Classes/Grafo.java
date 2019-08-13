@@ -28,23 +28,44 @@ public class Grafo
         Vertice or;
         Vertice dst;
         int [][]ma = new int[vertices.size()][vertices.size()];
-        for (Aresta a : arestas) {
+        
+        
+        for (Aresta a : arestas) 
+        {
             or = a.getV1();
             dst = a.getV2();
             ma[or.getID()][dst.getID()] = a.getValor();
             if(TelaPrincipalController.isGrafo())
                 ma[dst.getID()][or.getID()] = a.getValor();
         }
-        /*for (int i = 0; i < arestas.size(); i++) {
-            for (int j = 0; j < arestas.size(); j++) {
-                
-            }
-        }*/
         return ma;
     }
-    public Integer[][] getMatrizIncidencia()
+    public int[][] getMatrizIncidencia()
     {
-        return null;
+
+        Vertice or;
+        Vertice dst;
+        Aresta aaux;
+        int [][]ma = new int[vertices.size()][arestas.size()];
+        
+        for(int i = 0; i < arestas.size(); i++) 
+        {
+            aaux = arestas.get(i);
+            or = aaux.getV1();
+            dst = aaux.getV2();
+            
+            ma[or.getID()][i] = aaux.getValor();
+            ma[dst.getID()][i] = -aaux.getValor();
+            /*
+            for (int j = 0; j < vertices.size(); j++) 
+            {
+              if(vertices == or || vertices == dst)
+              {
+                  ma[i][j] = a.getValor();
+              }
+            }*/
+        }
+        return ma;
     }
     public List<?> getListaAdjacência()
     {
