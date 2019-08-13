@@ -33,6 +33,7 @@ import javafx.scene.layout.Pane;
  */
 public class TelaPrincipalController implements Initializable
 {
+    private static int sequencia;
     private static Grafo gf;
     private static boolean grafo;//Digrafo ou grafo
     //para o controle de ligações entre 2 vertices
@@ -69,6 +70,7 @@ public class TelaPrincipalController implements Initializable
         grafo = true;
         gf = new Grafo(vertices, arestas);
         stxMA = txMA;
+        sequencia = 0;
     }
 
     @FXML
@@ -88,7 +90,7 @@ public class TelaPrincipalController implements Initializable
     //problema
     private Integer getNextNumberVertice()
     {
-        int s = vertices.size();
+        /*int s = vertices.size();
         boolean flag = true;
         int i = s;
         for (; i - 1 > 0 && flag; i--)
@@ -98,7 +100,8 @@ public class TelaPrincipalController implements Initializable
                 flag = false;
             }
         }
-        return (flag) ? vertices.size() : i;
+        return (flag) ? vertices.size() : i;*/
+        return sequencia++;
     }
 
     public static void recalcularArestas()

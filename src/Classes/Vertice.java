@@ -25,7 +25,9 @@ public class Vertice extends JFXButton
 
     public Vertice(String text)
     {
-        super(text);
+        
+        //super(text);
+        super(new String(Character.toChars(Integer.parseInt(text)+65)));
         this.id = Integer.parseInt(text);
         iniciaInfos();
         initEventos();
@@ -79,6 +81,7 @@ public class Vertice extends JFXButton
                         Recursao rec = new Recursao(TelaPrincipalController.vaux, "0");
                         TelaPrincipalController.recursidade.add(rec);
                         TelaPrincipalController.painelAcessivel.getChildren().add(rec);
+                        TelaPrincipalController.painelAcessivel.getChildren().add(rec.getRotulo());
                         TelaPrincipalController.vaux = null;
                     }
                 }

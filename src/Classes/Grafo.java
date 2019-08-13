@@ -54,7 +54,8 @@ public class Grafo
     {
         List<String> la = new ArrayList<>();
         for (Vertice vertice : vertices) {
-            la.add(Integer.toString(vertice.getID()));
+            la.add(new String(Character.toChars(vertice.getID()+65)));
+            //la.add(Integer.toString(vertice.getID()));
         }
         return la;
     }
