@@ -7,7 +7,10 @@ package Classes;
 
 import java.util.List;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -33,7 +36,9 @@ public class Aresta extends Line
         this.v1 = v1;
         this.v2 = v2;
         cabeca = new Circle(3,  Paint.valueOf("ffffff"));//Circle(v2.getLayoutX(), v2.getLayoutY(), 3, Paint.valueOf("ffffff"));
+        setStroke(Paint.valueOf("#ffffff"));
         calcPos();
+        iniciaEventos();
     }
 
     public Rotulo getRotulo()
@@ -103,5 +108,22 @@ public class Aresta extends Line
         ob.remove(cabeca);
         ob.remove(this);
         ar.remove(this);
+    }
+
+    private void iniciaEventos()
+    {
+        this.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                if(event.getButton() == MouseButton.SECONDARY)
+                {
+                    dispose();
+                    TelaPrincipalController.processaEstruturas();
+                }
+            }
+            
+        });
     }
 }

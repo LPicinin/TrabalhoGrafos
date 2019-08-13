@@ -9,19 +9,14 @@ import Classes.Aresta;
 import Classes.Grafo;
 import Classes.Recursao;
 import Classes.Vertice;
-import Util.Util;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -122,6 +117,7 @@ public class TelaPrincipalController implements Initializable
     {
         grafo = true;
         recalcularArestas();
+        processaEstruturas();
     }
 
     @FXML
@@ -129,6 +125,7 @@ public class TelaPrincipalController implements Initializable
     {
         grafo = false;
         recalcularArestas();
+        processaEstruturas();
     }
 
     public static boolean isGrafo()

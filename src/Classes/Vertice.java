@@ -42,7 +42,7 @@ public class Vertice extends JFXButton
             {
                 if (event.getButton().equals(MouseButton.PRIMARY))
                 {
-                    System.out.println("Drag Detectado ID:" + Integer.toString(id));
+                    //System.out.println("Drag Detectado ID:" + Integer.toString(id));
                     setLayoutX(event.getSceneX() - getPrefWidth() / 2 - 15);
                     setLayoutY(event.getSceneY() - getPrefHeight() / 2 - 80);
 
@@ -59,7 +59,7 @@ public class Vertice extends JFXButton
             {
                 if (event.getButton().equals(MouseButton.MIDDLE))
                 {
-                    System.out.println("Click ligação ID:" + Integer.toString(id));
+                    //System.out.println("Click ligação ID:" + Integer.toString(id));
                     if (TelaPrincipalController.vaux == null)
                     {
                         TelaPrincipalController.vaux = buscaId(id);
@@ -88,8 +88,9 @@ public class Vertice extends JFXButton
                 }
                 if (event.getButton().equals(MouseButton.SECONDARY))
                 {
-                    System.out.println("Click exclusão ID:" + Integer.toString(id));
+                    //System.out.println("Click exclusão ID:" + Integer.toString(id));
                     dispose();
+                    TelaPrincipalController.processaEstruturas();
                     /*
                     System.out.println(TelaPrincipalController.vertices.indexOf(this));
                     TelaPrincipalController.vertices.remove(this);
@@ -147,7 +148,8 @@ public class Vertice extends JFXButton
         setStyle("-fx-padding: 10;\n"
                 + "-fx-background-color: gray;\n"
                 + "-fx-border-radius: 30 30 30 30;"
-                + "");
+                + "-fx-background-radius: 50;");
+        
     }
 
     public int getID()
@@ -192,6 +194,18 @@ public class Vertice extends JFXButton
         for (Aresta aresta : MarcadosParaRemocao)
         {
             aresta.dispose();
+        }
+        List<Recursao> recMarc = new ArrayList<>();
+        for (Recursao r : TelaPrincipalController.recursidade)
+        {
+            if(r.getV().getID() == id)
+            {
+                recMarc.add(r);
+            }
+        }
+        for (Recursao recursao : recMarc)
+        {
+            recursao.dispose();
         }
     }
 }

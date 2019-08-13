@@ -63,6 +63,7 @@ public class Recursao extends QuadCurve
     {
         TelaPrincipalController.painelAcessivel.getChildren().remove(this);
         TelaPrincipalController.recursidade.remove(this);
+        rotulo.dispose();
     }
 
     public void calcPos() 
