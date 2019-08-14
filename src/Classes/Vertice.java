@@ -25,9 +25,9 @@ public class Vertice extends JFXButton
 
     public Vertice(String text)
     {
-        
+
         //super(text);
-        super(new String(Character.toChars(Integer.parseInt(text)+65)));
+        super(new String(Character.toChars(Integer.parseInt(text) + 65)));
         this.id = Integer.parseInt(text);
         iniciaInfos();
         initEventos();
@@ -63,20 +63,19 @@ public class Vertice extends JFXButton
                     if (TelaPrincipalController.vaux == null)
                     {
                         TelaPrincipalController.vaux = buscaId(id);
-                    } else if(TelaPrincipalController.vaux.getID() != getID())//não é recursao
+                    } else if (TelaPrincipalController.vaux.getID() != getID())//não é recursao
                     {
                         Aresta ar = new Aresta("0", TelaPrincipalController.vaux, buscaId(id));
                         //Arrow seta = new Arrow(TelaPrincipalController.vaux.getLayoutX(), TelaPrincipalController.vaux.getLayoutY(), getLayoutX(), getLayoutY(), 0);
                         //TelaPrincipalController.painelAcessivel.getChildren().add(seta);
-                        
+
                         TelaPrincipalController.arestas.add(ar);
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar);
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
                         TelaPrincipalController.painelAcessivel.getChildren().add(ar.getCabeca());
-                        
+
                         TelaPrincipalController.vaux = null;
-                    }
-                    else//recursao
+                    } else//recursao
                     {
                         Recursao rec = new Recursao(TelaPrincipalController.vaux, "0");
                         TelaPrincipalController.recursidade.add(rec);
@@ -149,7 +148,7 @@ public class Vertice extends JFXButton
                 + "-fx-background-color: gray;\n"
                 + "-fx-border-radius: 30 30 30 30;"
                 + "-fx-background-radius: 50;");
-        
+
     }
 
     public int getID()
@@ -160,16 +159,19 @@ public class Vertice extends JFXButton
     public void setID(int id)
     {
         this.id = id;
+        //setText(new String(Character.toChars(this.id+65)));
     }
 
     public void dispose()
     {
         Vertice v;
+        int index = TelaPrincipalController.vertices.size();
         for (int i = 0; i < TelaPrincipalController.vertices.size(); i++)
         {
             v = TelaPrincipalController.vertices.get(i);
             if (v.getID() == getID())
             {
+                index = TelaPrincipalController.vertices.indexOf(v);
                 TelaPrincipalController.vertices.remove(v);
             }
         }
@@ -179,17 +181,21 @@ public class Vertice extends JFXButton
             Node vc = obAux.get(i);
             if (vc instanceof Vertice)
             {
-                if(((Vertice)vc).getID() == getID())
+                if (((Vertice) vc).getID() == getID())
+                {
                     obAux.remove(vc);
+                }
             }
         }
-        
+
         List<Aresta> arestas = TelaPrincipalController.arestas;
         List<Aresta> MarcadosParaRemocao = new ArrayList<>();
         for (Aresta aresta : arestas)
         {
-            if(aresta.getV1().getID() == this.id || aresta.getV2().getID() == this.id)
+            if (aresta.getV1().getID() == this.id || aresta.getV2().getID() == this.id)
+            {
                 MarcadosParaRemocao.add(aresta);
+            }
         }
         for (Aresta aresta : MarcadosParaRemocao)
         {
@@ -198,7 +204,7 @@ public class Vertice extends JFXButton
         List<Recursao> recMarc = new ArrayList<>();
         for (Recursao r : TelaPrincipalController.recursidade)
         {
-            if(r.getV().getID() == id)
+            if (r.getV().getID() == id)
             {
                 recMarc.add(r);
             }
@@ -207,5 +213,11 @@ public class Vertice extends JFXButton
         {
             recursao.dispose();
         }
+        /*
+        for (; index < TelaPrincipalController.vertices.size(); index++)
+        {
+            TelaPrincipalController.vertices.get(index).setID(TelaPrincipalController.vertices.get(index).getID() - 1);
+        }
+        */
     }
 }
