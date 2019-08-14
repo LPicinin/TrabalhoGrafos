@@ -160,16 +160,19 @@ public class Vertice extends JFXButton
     public void setID(int id)
     {
         this.id = id;
+        setText(new String(Character.toChars(this.id+65)));
     }
 
     public void dispose()
     {
         Vertice v;
+        int index = TelaPrincipalController.vertices.size();
         for (int i = 0; i < TelaPrincipalController.vertices.size(); i++)
         {
             v = TelaPrincipalController.vertices.get(i);
             if (v.getID() == getID())
             {
+                index = TelaPrincipalController.vertices.indexOf(v);
                 TelaPrincipalController.vertices.remove(v);
             }
         }
@@ -207,5 +210,9 @@ public class Vertice extends JFXButton
         {
             recursao.dispose();
         }
+        
+         for(; index < TelaPrincipalController.vertices.size() ; index++ )
+                    TelaPrincipalController.vertices.get(index).setID(TelaPrincipalController.vertices.get(index).getID()-1);
+                
     }
 }

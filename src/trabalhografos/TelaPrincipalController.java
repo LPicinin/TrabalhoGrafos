@@ -87,7 +87,7 @@ public class TelaPrincipalController implements Initializable
     //problema
     private Integer getNextNumberVertice()
     {
-        /*int s = vertices.size();
+        int s = vertices.size();
         boolean flag = true;
         int i = s;
         for (; i - 1 > 0 && flag; i--)
@@ -97,8 +97,8 @@ public class TelaPrincipalController implements Initializable
                 flag = false;
             }
         }
-        return (flag) ? vertices.size() : i;*/
-        return sequencia++;
+        return (flag) ? vertices.size() : i;
+        //return sequencia++;
     }
 
     public static void recalcularArestas()
@@ -155,38 +155,49 @@ public class TelaPrincipalController implements Initializable
 
     public static void processaEstruturas() 
     {
-        int[][] ma = gf.getMatrizAdjacencia();
-        //System.out.println(Arrays.deepToString(ma));
-        List<String> lr = gf.getListaRotulos();
-        String saidaMA = "[-]\t"+lr.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
-        for (int i = 0; i < ma.length; i++) 
-        {
-            saidaMA += "["+lr.get(i)+"]\t";
-            for (int j = 0; j < ma[0].length; j++) 
-            {
-                //saidaMA += Integer.toString(ma[i][j]);
-                saidaMA += ma[i][j]+" ";
-            }
-            saidaMA+="\n";
+        for (Vertice vertice : vertices) {
+            System.out.println(vertice.getText()+": "+vertice.getID());
         }
-        stxMA.setText(saidaMA);
-        
-        /////////////////////////////////////////////////
-        int[][] mi = gf.getMatrizIncidencia();
-        List<String> lr2 = gf.getListaRotulosMI();
-        if(arestas.size() > 0)
+        System.out.println("------------------");
+        try
         {
-            saidaMA = "[-]\t"+lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
-            for (int i = 0; i < mi.length; i++) {
+            int[][] ma = gf.getMatrizAdjacencia();
+            //System.out.println(Arrays.deepToString(ma));
+            List<String> lr = gf.getListaRotulos();
+            String saidaMA = "[-]\t"+lr.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
+            for (int i = 0; i < ma.length; i++) 
+            {
                 saidaMA += "["+lr.get(i)+"]\t";
-                for (int j = 0; j < mi[0].length; j++) 
+                for (int j = 0; j < ma[0].length; j++) 
                 {
-                    saidaMA += mi[i][j]+"\t";
+                    //saidaMA += Integer.toString(ma[i][j]);
+                    saidaMA += ma[i][j]+" ";
                 }
                 saidaMA+="\n";
             }
-            stxMI.setText(saidaMA);
+            stxMA.setText(saidaMA);
+
+            /////////////////////////////////////////////////
+            int[][] mi = gf.getMatrizIncidencia();
+            List<String> lr2 = gf.getListaRotulosMI();
+            if(arestas.size() > 0)
+            {
+                saidaMA = "[-]\t"+lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
+                for (int i = 0; i < mi.length; i++) {
+                    saidaMA += "["+lr.get(i)+"]\t  ";
+                    for (int j = 0; j < mi[0].length; j++) 
+                    {
+                        saidaMA += mi[i][j]+"\t";
+                    }
+                    saidaMA+="\n";
+                }
+                stxMI.setText(saidaMA);
+            }
+        }catch(Exception ex)
+        {
+            System.out.println(ex.getCause());
         }
+        
         
     }
     
