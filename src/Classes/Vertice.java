@@ -213,11 +213,16 @@ public class Vertice extends JFXButton
         {
             recursao.dispose();
         }
+
         /*
         for (; index < TelaPrincipalController.vertices.size(); index++)
         {
             TelaPrincipalController.vertices.get(index).setID(TelaPrincipalController.vertices.get(index).getID() - 1);
         }
         */
+
+        
+         for(; index < TelaPrincipalController.vertices.size() ; index++ )
+                    TelaPrincipalController.vertices.get(index).setID(TelaPrincipalController.vertices.get(index).getID()-1);
     }
 }

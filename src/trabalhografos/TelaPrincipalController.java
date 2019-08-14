@@ -87,7 +87,6 @@ public class TelaPrincipalController implements Initializable
     //problema
     private Integer getNextNumberVertice()
     {
-        /*
         int s = vertices.size();
         boolean flag = true;
         int i = s;
@@ -99,8 +98,8 @@ public class TelaPrincipalController implements Initializable
             }
         }
         return (flag) ? vertices.size() : i;
-        */
-        return sequencia++;
+        //return sequencia++;
+
     }
 
     public static void recalcularArestas()
@@ -197,6 +196,7 @@ public class TelaPrincipalController implements Initializable
             }
             else
                 stxMI.setText("");
+
         }catch(Exception ex)
         {
             System.out.println(ex.getCause());
