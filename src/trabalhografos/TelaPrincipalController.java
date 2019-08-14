@@ -55,6 +55,7 @@ public class TelaPrincipalController implements Initializable
     private static JFXTextArea stxMI;
     @FXML
     private JFXTextArea txLista;
+    private static JFXTextArea stxLista;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -67,6 +68,7 @@ public class TelaPrincipalController implements Initializable
         gf = new Grafo(vertices, arestas, recursidade);
         stxMA = txMA;
         stxMI = txMI;
+        stxLista = txLista;
         sequencia = 0;
     }
 
@@ -87,6 +89,7 @@ public class TelaPrincipalController implements Initializable
     //problema
     private Integer getNextNumberVertice()
     {
+        /*
         int s = vertices.size();
         boolean flag = true;
         int i = s;
@@ -98,7 +101,8 @@ public class TelaPrincipalController implements Initializable
             }
         }
         return (flag) ? vertices.size() : i;
-        //return sequencia++;
+        */
+        return sequencia++;
 
     }
 
@@ -162,6 +166,7 @@ public class TelaPrincipalController implements Initializable
         System.out.println("------------------");
         try
         {
+            //////////////////////////////////////////////////MA
             int[][] ma = gf.getMatrizAdjacencia();
             //System.out.println(Arrays.deepToString(ma));
             List<String> lr = gf.getListaRotulos();
@@ -178,7 +183,7 @@ public class TelaPrincipalController implements Initializable
             }
             stxMA.setText(saidaMA);
 
-            /////////////////////////////////////////////////
+            /////////////////////////////////////////////////MI
             int[][] mi = gf.getMatrizIncidencia();
             List<String> lr2 = gf.getListaRotulosMI();
             if(arestas.size() > 0)
@@ -196,6 +201,14 @@ public class TelaPrincipalController implements Initializable
             }
             else
                 stxMI.setText("");
+            
+            List<List<String>> la = gf.getListaAdjacencia();
+            String saidaLA = "";
+            for (List<String> list : la)
+            {
+                saidaLA += list.toString().replace(",", "->")+"\n";
+            }
+            stxLista.setText(saidaLA);
 
         }catch(Exception ex)
         {

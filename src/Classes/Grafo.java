@@ -32,21 +32,31 @@ public class Grafo
         Vertice or;
         Vertice dst;
         int[][] ma = new int[vertices.size()][vertices.size()];
-
-        for (Aresta a : arestas)
+        int[] vaux;
+        if (vertices.size() > 1)
         {
-            or = a.getV1();
-            dst = a.getV2();
-            ma[or.getID()][dst.getID()] = a.getValor();
-            if (TelaPrincipalController.isGrafo())
+            int c = 0;
+            vaux = new int[vertices.get(vertices.size() - 1).getID()+1];
+            for (Vertice vertice : vertices)
             {
-                ma[dst.getID()][or.getID()] = a.getValor();
+                vaux[vertice.getID()] = c++;
+            }
+            for (Aresta a : arestas)
+            {
+                or = a.getV1();
+                dst = a.getV2();
+                ma[vaux[or.getID()]][vaux[dst.getID()]] = a.getValor();
+                if (TelaPrincipalController.isGrafo())
+                {
+                    ma[vaux[dst.getID()]][vaux[or.getID()]] = a.getValor();
+                }
+            }
+            for (Recursao recursoe : recursoes)
+            {
+                ma[vaux[recursoe.getV().getID()]][vaux[recursoe.getV().getID()]] = recursoe.getValor();
             }
         }
-        for (Recursao recursoe : recursoes)
-        {
-            ma[recursoe.getV().getID()][recursoe.getV().getID()] = recursoe.getValor();
-        }
+
         return ma;
     }
 
@@ -59,15 +69,24 @@ public class Grafo
         int[][] ma = new int[vertices.size()][arestas.size() + recursoes.size()];
 
         int i;
-        for (i = 0; i < arestas.size(); i++)
+        int[] vaux;
+        if (vertices.size() > 1)
         {
-            aaux = arestas.get(i);
-            or = aaux.getV1();
-            dst = aaux.getV2();
+            int c = 0;
+            vaux = new int[vertices.get(vertices.size() - 1).getID()+1];
+            for (Vertice vertice : vertices)
+            {
+                vaux[vertice.getID()] = c++;
+            }
+            for (i = 0; i < arestas.size(); i++)
+            {
+                aaux = arestas.get(i);
+                or = aaux.getV1();
+                dst = aaux.getV2();
 
-            ma[or.getID()][i] = -aaux.getValor();
-            ma[dst.getID()][i] = aaux.getValor();
-            /*
+                ma[vaux[or.getID()]][i] = -aaux.getValor();
+                ma[vaux[dst.getID()]][i] = aaux.getValor();
+                /*
             for (int j = 0; j < vertices.size(); j++) 
             {
               if(vertices == or || vertices == dst)
@@ -75,10 +94,11 @@ public class Grafo
                   ma[i][j] = a.getValor();
               }
             }*/
-        }
-        for (Recursao recursoe : recursoes)
-        {
-            ma[recursoe.getV().getID()][i++] = recursoe.getValor();
+            }
+            for (Recursao recursoe : recursoes)
+            {
+                ma[recursoe.getV().getID()][i++] = recursoe.getValor();
+            }
         }
         return ma;
     }
@@ -112,17 +132,24 @@ public class Grafo
         }
         return lrmi;
     }
-    
+
     public List<List<String>> getListaAdjacencia()
     {
         List<List<String>> ll = new ArrayList<>(vertices.size());
         List<String> linha;
-        for (Aresta aresta : arestas)
+        for (Vertice ver : vertices)
         {
-            linha = new ArrayList<>();
-            
+            linha = new ArrayList<String>();
+            linha.add(ver.getText());
+            for (Aresta ar : arestas)
+            {
+                if(ver.getID() == ar.getV1().getID())
+                {
+                    linha.add(ar.getV2().getText());
+                }
+            }
+            ll.add(linha);
         }
-        
         return ll;
     }
 }
