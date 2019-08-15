@@ -71,6 +71,10 @@ and open the template in the editor.
     -fx-border-radius: 10 10 10 10;
     
 }
+label
+{
+    -fx-text-fill: black;
+}
 /*
 .default-color0.chart-series-line { -fx-stroke: transparent; }
 .default-color1.chart-series-line { -fx-stroke: red; }

@@ -24,6 +24,7 @@ public class TrabalhoGrafos extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Trabalho de Grafos: Luís Henrique e Armando Marioto");
         stage.show();
     }
 

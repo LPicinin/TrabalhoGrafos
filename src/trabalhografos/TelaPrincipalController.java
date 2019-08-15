@@ -11,16 +11,24 @@ import Classes.Recursao;
 import Classes.Vertice;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -216,6 +224,27 @@ public class TelaPrincipalController implements Initializable
         }
         
         
+    }
+
+    @FXML
+    private void evtHelp(MouseEvent event)
+    {
+        try
+        {
+            Stage st = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("TelaHelp.fxml"));
+            
+            Scene scene = new Scene(root);
+            
+            st.setScene(scene);
+            st.setTitle("Help!!!");
+            st.setResizable(false);
+            //st.initStyle(StageStyle.DECORATED);
+            st.show();
+        } catch (IOException ex)
+        {
+            System.out.println(ex.getCause());
+        }
     }
     
 }

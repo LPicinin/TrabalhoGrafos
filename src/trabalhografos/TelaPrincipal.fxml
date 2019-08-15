@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,41 +11,52 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="750.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabalhografos.TelaPrincipalController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="909.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabalhografos.TelaPrincipalController">
    <bottom>
-      <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
                <children>
                   <Label text="MA" />
-                  <JFXTextArea fx:id="txMA" editable="false" labelFloat="true" prefWidth="250.0" />
+                  <JFXTextArea fx:id="txMA" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
                <children>
                   <Label text="MI" />
-                  <JFXTextArea fx:id="txMI" editable="false" labelFloat="true" prefWidth="250.0" />
+                  <JFXTextArea fx:id="txMI" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
                <children>
                   <Label text="Lista" />
-                  <JFXTextArea fx:id="txLista" editable="false" labelFloat="true" prefWidth="250.0" />
+                  <JFXTextArea fx:id="txLista" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
                </children>
             </VBox>
          </children>
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER" prefHeight="61.0" prefWidth="631.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Trabalho Grafos">
-               <font>
-                  <Font name="Courier New Bold Italic" size="28.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      <BorderPane prefHeight="69.0" prefWidth="909.0" BorderPane.alignment="CENTER">
+         <center>
+            <HBox alignment="CENTER" prefHeight="76.0" prefWidth="824.0">
+               <children>
+                  <Label text="Trabalho Grafos">
+                     <font>
+                        <Font name="Courier New Bold Italic" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </center>
+         <right>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="62.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MaterialIconView fill="#4000ff" glyphName="HELP" onMouseClicked="#evtHelp" size="30" />
+               </children>
+            </HBox>
+         </right>
+      </BorderPane>
    </top>
    <center>
       <Pane fx:id="painel" onMouseClicked="#evtClkMouse" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />

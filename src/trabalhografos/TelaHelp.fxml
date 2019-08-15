@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="359.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Help">
+               <font>
+                  <Font name="Courier New" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="239.0" fitWidth="289.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/mouse.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <JFXTextArea editable="false" focusColor="#323232" focusTraversable="false" maxWidth="400.0" prefHeight="204.0" prefWidth="400.0" text="MB1:  pressionado no painel cria um vertice, se pressionado sobre o vertice permite move-lo enquanto pressionado.&#10;&#10;MB3: permite excluir os componentes do grafo.&#10;&#10;MB2: quando pressionado em dois vertices seguidos cria uma aresta, além de que quando rolado sobre um rótulo de uma aresta altera-se o valor da aresta." unFocusColor="#323232" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

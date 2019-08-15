@@ -36,7 +36,7 @@ public class Grafo
         if (vertices.size() > 1)
         {
             int c = 0;
-            vaux = new int[vertices.get(vertices.size() - 1).getID()+1];
+            vaux = new int[vertices.get(vertices.size() - 1).getID() + 1];
             for (Vertice vertice : vertices)
             {
                 vaux[vertice.getID()] = c++;
@@ -73,7 +73,7 @@ public class Grafo
         if (vertices.size() > 1)
         {
             int c = 0;
-            vaux = new int[vertices.get(vertices.size() - 1).getID()+1];
+            vaux = new int[vertices.get(vertices.size() - 1).getID() + 1];
             for (Vertice vertice : vertices)
             {
                 vaux[vertice.getID()] = c++;
@@ -101,11 +101,6 @@ public class Grafo
             }
         }
         return ma;
-    }
-
-    public List<?> getListaAdjacência()
-    {
-        return null;
     }
 
     public List<String> getListaRotulos()
@@ -137,17 +132,45 @@ public class Grafo
     {
         List<List<String>> ll = new ArrayList<>(vertices.size());
         List<String> linha;
+        Vertice vaux;
         for (Vertice ver : vertices)
         {
             linha = new ArrayList<String>();
-            linha.add(ver.getText());
-            for (Aresta ar : arestas)
+            if (!TelaPrincipalController.isGrafo())//considera apenas a ida
             {
-                if(ver.getID() == ar.getV1().getID())
+                for (Aresta ar : arestas)
                 {
-                    linha.add(ar.getV2().getText());
+                    if (ver.getID() == ar.getV1().getID())
+                    {
+                        linha.add(ar.getV2().getText()+"("+ar.getValor()+")");
+                    }
+                }
+            } else
+            {
+                for (Aresta ar : arestas)
+                {
+                    vaux = (ver.getID() == ar.getV1().getID()) ?
+                                ar.getV2() : 
+                                    (ver.getID() == ar.getV2().getID()) ? 
+                                        ar.getV1() : 
+                                            null;
+                    if (vaux != null)
+                    {
+                        linha.add(vaux.getText()+"("+ar.getValor()+")");
+                    }
                 }
             }
+            for (Recursao recursoe : recursoes)
+            {
+                if(recursoe.getV().getID() == ver.getID())
+                    linha.add(ver.getText()+"("+recursoe.getValor()+")");
+            }
+
+            linha.sort((o1, o2) ->
+            {
+                return o1.compareToIgnoreCase(o2);
+            });
+            linha.add(0, ver.getText());
             ll.add(linha);
         }
         return ll;

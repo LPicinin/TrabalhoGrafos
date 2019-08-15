@@ -5,6 +5,7 @@
  */
 package Classes;
 
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.QuadCurve;
 import trabalhografos.TelaPrincipalController;
@@ -22,14 +23,6 @@ public class Recursao extends QuadCurve
     {
         rotulo = new Rotulo(rot);
         this.v = v;
-        
-        /**/
-        double x = v.getLayoutX();
-        double y = v.getLayoutY();
-        double w = v.getWidth();
-        double h = v.getHeight();
-        y += h;
-        
         setStartX(-60);
         setStartY(-70);
         
@@ -40,7 +33,7 @@ public class Recursao extends QuadCurve
         setControlY(-24);
         setFill(Paint.valueOf("#323232"));
         setStroke(Paint.valueOf("#ffffff"));
-        /**/
+        initEventos();
         calcPos();
         
     }
@@ -61,9 +54,10 @@ public class Recursao extends QuadCurve
     
     public void dispose()
     {
+        rotulo.dispose();
         TelaPrincipalController.painelAcessivel.getChildren().remove(this);
         TelaPrincipalController.recursidade.remove(this);
-        rotulo.dispose();
+        TelaPrincipalController.processaEstruturas();
     }
 
     public void calcPos() 
@@ -78,5 +72,16 @@ public class Recursao extends QuadCurve
         
         rotulo.setLayoutX(x+w/2-3);
         rotulo.setLayoutY(y+60);
+    }
+
+    private void initEventos()
+    {
+        this.setOnMouseClicked((event) ->
+        {
+            if(event.getButton() == MouseButton.SECONDARY)
+            {
+                dispose();
+            }
+        });
     }
 }
