@@ -35,6 +35,9 @@ public class Rotulo extends Label
     {
         this.setOnScroll((ScrollEvent event) -> {
             int deltaY = (event.getDeltaY() > 0)? 1 : -1;
+            if((Integer.parseInt(getText())+deltaY) < 1)
+                setText(Integer.toString(1));
+            else
             setText(Integer.toString(Integer.parseInt(getText())+deltaY));
             TelaPrincipalController.processaEstruturas();
         });
