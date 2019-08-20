@@ -33,27 +33,30 @@ public class Grafo
         Vertice dst;
         int[][] ma = new int[vertices.size()][vertices.size()];
         int[] vaux;
-        if (vertices.size() > 1)
+        if (!isMultAresta())
         {
-            int c = 0;
-            vaux = new int[vertices.get(vertices.size() - 1).getID() + 1];
-            for (Vertice vertice : vertices)
+            if (vertices.size() > 1)
             {
-                vaux[vertice.getID()] = c++;
-            }
-            for (Aresta a : arestas)
-            {
-                or = a.getV1();
-                dst = a.getV2();
-                ma[vaux[or.getID()]][vaux[dst.getID()]] = a.getValor();
-                if (TelaPrincipalController.isGrafo())
+                int c = 0;
+                vaux = new int[vertices.get(vertices.size() - 1).getID() + 1];
+                for (Vertice vertice : vertices)
                 {
-                    ma[vaux[dst.getID()]][vaux[or.getID()]] = a.getValor();
+                    vaux[vertice.getID()] = c++;
                 }
-            }
-            for (Recursao recursoe : recursoes)
-            {
-                ma[vaux[recursoe.getV().getID()]][vaux[recursoe.getV().getID()]] = recursoe.getValor();
+                for (Aresta a : arestas)
+                {
+                    or = a.getV1();
+                    dst = a.getV2();
+                    ma[vaux[or.getID()]][vaux[dst.getID()]] = a.getValor();
+                    if (TelaPrincipalController.isGrafo())
+                    {
+                        ma[vaux[dst.getID()]][vaux[or.getID()]] = a.getValor();
+                    }
+                }
+                for (Recursao recursoe : recursoes)
+                {
+                    ma[vaux[recursoe.getV().getID()]][vaux[recursoe.getV().getID()]] = recursoe.getValor();
+                }
             }
         }
 
@@ -142,31 +145,34 @@ public class Grafo
                 {
                     if (ver.getID() == ar.getV1().getID())
                     {
-                        linha.add(ar.getV2().getText()+"("+ar.getValor()+")");
+                        linha.add(ar.getV2().getText() + "(" + ar.getValor() + ")");
                     }
                 }
             } else
             {
                 for (Aresta ar : arestas)
                 {
-                    vaux = (ver.getID() == ar.getV1().getID()) ?
-                                ar.getV2() : 
-                                    (ver.getID() == ar.getV2().getID()) ? 
-                                        ar.getV1() : 
-                                            null;
+                    vaux = (ver.getID() == ar.getV1().getID())
+                            ? ar.getV2()
+                            : (ver.getID() == ar.getV2().getID())
+                            ? ar.getV1()
+                            : null;
                     if (vaux != null)
                     {
-                        linha.add(vaux.getText()+"("+ar.getValor()+")");
+                        linha.add(vaux.getText() + "(" + ar.getValor() + ")");
                     }
                 }
             }
             for (Recursao recursoe : recursoes)
             {
-                if(recursoe.getV().getID() == ver.getID())
-                    linha.add(ver.getText()+"("+recursoe.getValor()+")");
+                if (recursoe.getV().getID() == ver.getID())
+                {
+                    linha.add(ver.getText() + "(" + recursoe.getValor() + ")");
+                }
             }
 
-            linha.sort((o1, o2) ->
+            linha.sort((o1, o2)
+                    ->
             {
                 return o1.compareToIgnoreCase(o2);
             });
@@ -174,5 +180,23 @@ public class Grafo
             ll.add(linha);
         }
         return ll;
+    }
+
+    private boolean isMultAresta()
+    {
+        int c = 0;
+        int s;
+        for (Aresta aresta : arestas)
+        {
+            s = aresta.getV1().getID() + aresta.getV2().getID();
+            for (Aresta aresta2 : arestas)
+            {
+                if (s == aresta2.getV1().getID() + aresta2.getV2().getID())
+                {
+                    c++;
+                }
+            }
+        }
+        return c > 1;
     }
 }
