@@ -6,11 +6,9 @@
 package Classes;
 
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import trabalhografos.TelaPrincipalController;
 
@@ -34,12 +32,35 @@ public class Rotulo extends Label
     private void iniciaInfos()
     {
         this.setOnScroll((ScrollEvent event) -> {
-            int deltaY = (event.getDeltaY() > 0)? 1 : -1;
+            int v;
+            try
+            {
+                v = Integer.parseInt(TelaPrincipalController.stxval.getText());
+            }
+            catch(Exception ex)
+            {
+                v = 1;
+            }
+            int deltaY = (event.getDeltaY() > 0)? v : -1*v;
             if((Integer.parseInt(getText())+deltaY) < 1)
                 setText(Integer.toString(1));
             else
-            setText(Integer.toString(Integer.parseInt(getText())+deltaY));
+                setText(Integer.toString(Integer.parseInt(getText())+deltaY));
             TelaPrincipalController.processaEstruturas();
+        });
+        this.setOnMouseClicked((event) ->
+        {
+            try
+            {
+                if(event.getButton() == MouseButton.SECONDARY)
+                {
+                    setText(TelaPrincipalController.stxval.getText());
+                }
+            } catch (Exception ex)
+            {
+                //System.out.println(System.getProperty("user.dir")+"/src/trabalhografos/TelaAlteraRotulo.fxml");
+                System.out.println(ex.getCause()+"\n\n"+System.getProperty("user.dir"));
+            }
         });
         /*
         this.setOnMouseClicked(new EventHandler<MouseEvent>()

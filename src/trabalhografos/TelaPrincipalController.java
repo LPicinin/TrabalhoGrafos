@@ -11,6 +11,7 @@ import Classes.Recursao;
 import Classes.Vertice;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -64,7 +65,10 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private JFXTextArea txLista;
     private static JFXTextArea stxLista;
-
+    @FXML
+    private JFXTextField txval;
+    public static JFXTextField stxval;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -76,6 +80,7 @@ public class TelaPrincipalController implements Initializable
         gf = new Grafo(vertices, arestas, recursidade);
         stxMA = txMA;
         stxMI = txMI;
+        stxval = txval;
         stxLista = txLista;
         sequencia = 0;
     }

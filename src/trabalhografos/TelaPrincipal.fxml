@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -62,15 +63,26 @@
       <Pane fx:id="painel" onMouseClicked="#evtClkMouse" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <VBox prefHeight="339.0" prefWidth="99.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <JFXRadioButton fx:id="rbGrafo" focusTraversable="false" onMouseClicked="#evtGrafo" selected="true" text="Grafo">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuOP" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="rbDrigrafo" focusTraversable="false" onMouseClicked="#evtDigrafo" text="Digrafo" toggleGroup="$menuOP" />
-         </children>
-      </VBox>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <VBox prefHeight="385.0" prefWidth="113.0" spacing="5.0">
+               <children>
+                  <JFXRadioButton fx:id="rbGrafo" focusTraversable="false" onMouseClicked="#evtGrafo" selected="true" text="Grafo">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="menuOP" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="rbDrigrafo" focusTraversable="false" onMouseClicked="#evtDigrafo" text="Digrafo" toggleGroup="$menuOP" />
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="67.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="txval" labelFloat="true" prefHeight="25.0" prefWidth="110.0" promptText="Valor:" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
    </right>
 </BorderPane>
