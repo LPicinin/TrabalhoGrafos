@@ -186,17 +186,21 @@ public class Grafo
     {
         int c = 0;
         int s;
-        for (Aresta aresta : arestas)
+        boolean flag = false;
+        
+        for (int i = 0; i < arestas.size() && !flag; i++)
         {
-            s = aresta.getV1().getID() + aresta.getV2().getID();
+            s = arestas.get(i).getSomaVertices();
+            c = 0;
             for (Aresta aresta2 : arestas)
             {
-                if (s == aresta2.getV1().getID() + aresta2.getV2().getID())
+                if (s == aresta2.getSomaVertices())
                 {
                     c++;
                 }
             }
+            flag = c > 1;
         }
-        return c > 1;
+        return flag;
     }
 }

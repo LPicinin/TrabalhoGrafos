@@ -17,8 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +27,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  *
@@ -37,6 +34,7 @@ import javafx.stage.StageStyle;
  */
 public class TelaPrincipalController implements Initializable
 {
+
     private static int sequencia;
     private static Grafo gf;
     private static boolean grafo;//Digrafo ou grafo
@@ -68,7 +66,7 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private JFXTextField txval;
     public static JFXTextField stxval;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -88,7 +86,7 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private void evtClkMouse(MouseEvent event)
     {
-        if (event.getButton().equals(MouseButton.PRIMARY) && vertices.size()+1 <= 10)
+        if (event.getButton().equals(MouseButton.PRIMARY) && vertices.size() + 1 <= 10)
         {
             Vertice jb = new Vertice(getNextNumberVertice().toString());
             jb.setLayoutX(event.getSceneX() - jb.getPrefWidth() / 2 - 15);
@@ -102,30 +100,17 @@ public class TelaPrincipalController implements Initializable
     //problema
     private Integer getNextNumberVertice()
     {
-        /*
-        int s = vertices.size();
-        boolean flag = true;
-        int i = s;
-        for (; i - 1 > 0 && flag; i--)
-        {
-            if (vertices.get(i - 1).getID() - 1 != vertices.get(i - 2).getID())
-            {
-                flag = false;
-            }
-        }
-        return (flag) ? vertices.size() : i;
-        */
         return sequencia++;
-
     }
 
     public static void recalcularArestas()
     {
-        for (int i = 0; i < arestas.size(); i++)
+        for (Aresta aresta : arestas)
         {
-            arestas.get(i).calcPos();
+            aresta.calcPos();
         }
-        for (Recursao recursao : recursidade) {
+        for (Recursao recursao : recursidade)
+        {
             recursao.calcPos();
         }
     }
@@ -171,10 +156,11 @@ public class TelaPrincipalController implements Initializable
         return painelAcessivel;
     }
 
-    public static void processaEstruturas() 
+    public static void processaEstruturas()
     {
-        for (Vertice vertice : vertices) {
-            System.out.println(vertice.getText()+": "+vertice.getID());
+        for (Vertice vertice : vertices)
+        {
+            System.out.println(vertice.getText() + ": " + vertice.getID());
         }
         System.out.println("------------------");
         try
@@ -183,52 +169,53 @@ public class TelaPrincipalController implements Initializable
             int[][] ma = gf.getMatrizAdjacencia();
             //System.out.println(Arrays.deepToString(ma));
             List<String> lr = gf.getListaRotulos();
-            String saidaMA = "[-]\t"+lr.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
-            for (int i = 0; i < ma.length; i++) 
+            String saidaMA = "[-]\t" + lr.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
+            for (int i = 0; i < ma.length; i++)
             {
-                saidaMA += "["+lr.get(i)+"]\t";
-                for (int j = 0; j < ma[0].length; j++) 
+                saidaMA += "[" + lr.get(i) + "]\t";
+                for (int j = 0; j < ma[0].length; j++)
                 {
                     //saidaMA += Integer.toString(ma[i][j]);
-                    saidaMA += ma[i][j]+" ";
+                    saidaMA += ma[i][j] + " ";
                 }
-                saidaMA+="\n";
+                saidaMA += "\n";
             }
             stxMA.setText(saidaMA);
 
             /////////////////////////////////////////////////MI
             int[][] mi = gf.getMatrizIncidencia();
             List<String> lr2 = gf.getListaRotulosMI();
-            if(arestas.size() > 0)
+            if (arestas.size() > 0)
             {
-                saidaMA = "[-]\t"+lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "")+"\n";
-                for (int i = 0; i < mi.length; i++) {
-                    saidaMA += "["+lr.get(i)+"]\t  ";
-                    for (int j = 0; j < mi[0].length; j++) 
+                saidaMA = "[-]\t" + lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
+                for (int i = 0; i < mi.length; i++)
+                {
+                    saidaMA += "[" + lr.get(i) + "]\t  ";
+                    for (int j = 0; j < mi[0].length; j++)
                     {
-                        saidaMA += mi[i][j]+"\t";
+                        saidaMA += mi[i][j] + "\t";
                     }
-                    saidaMA+="\n";
+                    saidaMA += "\n";
                 }
                 stxMI.setText(saidaMA);
-            }
-            else
+            } else
+            {
                 stxMI.setText("");
-            
+            }
+
             List<List<String>> la = gf.getListaAdjacencia();
             String saidaLA = "";
             for (List<String> list : la)
             {
-                saidaLA += list.toString().replace(",", "->")+"\n";
+                saidaLA += list.toString().replace(",", "->") + "\n";
             }
             stxLista.setText(saidaLA);
 
-        }catch(Exception ex)
+        } catch (Exception ex)
         {
             System.out.println(ex.getCause());
         }
-        
-        
+
     }
 
     @FXML
@@ -238,9 +225,9 @@ public class TelaPrincipalController implements Initializable
         {
             Stage st = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("TelaHelp.fxml"));
-            
+
             Scene scene = new Scene(root);
-            
+
             st.setScene(scene);
             st.setTitle("Help!!!");
             st.setResizable(false);
@@ -251,5 +238,5 @@ public class TelaPrincipalController implements Initializable
             System.out.println(ex.getCause());
         }
     }
-    
+
 }

@@ -68,13 +68,23 @@ public class Vertice extends JFXButton
                         Aresta ar = new Aresta("1", TelaPrincipalController.vaux, buscaId(id));
                         //Arrow seta = new Arrow(TelaPrincipalController.vaux.getLayoutX(), TelaPrincipalController.vaux.getLayoutY(), getLayoutX(), getLayoutY(), 0);
                         //TelaPrincipalController.painelAcessivel.getChildren().add(seta);
-
-                        TelaPrincipalController.arestas.add(ar);
-                        TelaPrincipalController.painelAcessivel.getChildren().add(ar);
-                        TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
-                        TelaPrincipalController.painelAcessivel.getChildren().add(ar.getCabeca());
-
-                        TelaPrincipalController.vaux = null;
+                        int index = arestaJaCriada(ar);
+                        if (index >= 0)
+                        {
+                            TelaPrincipalController.arestas.get(index).setDeslocamentoParaEvitarSobreposição(20);
+                            ar.setDeslocamentoParaEvitarSobreposição(-20);
+                        }
+                        if (index >= -1)
+                        {
+                            TelaPrincipalController.arestas.add(ar);
+                            TelaPrincipalController.painelAcessivel.getChildren().add(ar);
+                            TelaPrincipalController.painelAcessivel.getChildren().add(ar.getRotulo());
+                            TelaPrincipalController.painelAcessivel.getChildren().add(ar.getCabeca());
+                            TelaPrincipalController.vaux = null;
+                        } else
+                        {
+                            System.out.println("Aresta já existe");
+                        }
                     } else//recursao
                     {
                         Recursao rec = new Recursao(TelaPrincipalController.vaux, "1");
@@ -107,6 +117,29 @@ public class Vertice extends JFXButton
                         }
                     }*/
                 }
+            }
+
+            private int arestaJaCriada(Aresta ar)
+            {
+                int index = -1;
+                boolean flag = true;
+                List<Aresta> ars = TelaPrincipalController.arestas;
+                for (int i = 0; i < ars.size() && flag; i++)
+                {
+                    if (ars.get(i).getV1() != ar.getV1() || ars.get(i).getV2() != ar.getV2())
+                    {
+                        if (ar.getSomaVertices() == ars.get(i).getSomaVertices())
+                        {
+                            index = i;
+                            flag = false;
+                        }
+                    } else
+                    {
+                        flag = false;
+                        index = -2;
+                    }
+                }
+                return index;
             }
         });
     }
@@ -218,6 +251,6 @@ public class Vertice extends JFXButton
         {
             TelaPrincipalController.vertices.get(index).setID(TelaPrincipalController.vertices.get(index).getID() - 1);
         }
-        */
+         */
     }
 }
