@@ -203,4 +203,47 @@ public class Grafo
         }
         return flag;
     }
+    
+    public boolean gfsimplesAdjacencia(int [][]mat)
+    {
+        for (int i = 0; i < mat[0].length; i++) 
+        {
+            if(mat[i][i] != 0)
+                return false;    
+        }
+        return true;
+    }
+    
+    public boolean gfsimplesIncidencia(int [][]mat)
+    {
+        Vertice or,dst;
+        Aresta aaux;
+        for (int i = 0; i < arestas.size(); i++)
+            {
+                aaux = arestas.get(i);
+                or = aaux.getV1();
+                dst = aaux.getV2();
+                
+                if(or == dst)
+                    return false;
+            }
+        return true;
+    }
+        public boolean gfsimplesLista(List<List<String>> lista)// arrumando
+    {
+        Vertice or,dst;
+        Aresta aaux;
+        for (int i = 0; i < arestas.size(); i++)
+            {
+                aaux = arestas.get(i);
+                or = aaux.getV1();
+                dst = aaux.getV2();
+                
+                if(or == dst)
+                    return false;
+            }
+        return true;
+    }
+    
+   
 }
