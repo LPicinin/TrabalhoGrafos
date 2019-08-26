@@ -6,6 +6,8 @@
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,28 +16,71 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="909.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabalhografos.TelaPrincipalController">
    <bottom>
-      <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="25.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="909.0">
                <children>
-                  <Label text="MA" />
-                  <JFXTextArea fx:id="txMA" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                  <ImageView fitHeight="79.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/einstain.gif" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/plasm_ball.gif" />
+                           </image>
+                        </ImageView>
+                        <Label text="Simples" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/plasm_ball.gif" />
+                           </image>
+                        </ImageView>
+                        <Label text="Regular" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/plasm_ball.gif" />
+                           </image>
+                        </ImageView>
+                        <Label text="Completo" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="25.0">
                <children>
-                  <Label text="MI" />
-                  <JFXTextArea fx:id="txMI" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                     <children>
+                        <Label text="MA" />
+                        <JFXTextArea fx:id="txMA" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                     <children>
+                        <Label text="MI" />
+                        <JFXTextArea fx:id="txMI" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                     <children>
+                        <Label text="Lista" />
+                        <JFXTextArea fx:id="txLista" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
-               <children>
-                  <Label text="Lista" />
-                  <JFXTextArea fx:id="txLista" editable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
-               </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </bottom>
    <top>
       <BorderPane prefHeight="69.0" prefWidth="909.0" BorderPane.alignment="CENTER">

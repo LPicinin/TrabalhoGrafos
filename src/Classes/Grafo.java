@@ -6,6 +6,7 @@
 package Classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import trabalhografos.TelaPrincipalController;
 
@@ -86,8 +87,13 @@ public class Grafo
                 aaux = arestas.get(i);
                 or = aaux.getV1();
                 dst = aaux.getV2();
-
-                ma[vaux[or.getID()]][i] = -aaux.getValor();
+                if (!TelaPrincipalController.isGrafo())
+                {
+                    ma[vaux[or.getID()]][i] = -aaux.getValor();
+                } else
+                {
+                    ma[vaux[or.getID()]][i] = aaux.getValor();
+                }
                 ma[vaux[dst.getID()]][i] = aaux.getValor();
                 /*
             for (int j = 0; j < vertices.size(); j++) 
@@ -187,7 +193,7 @@ public class Grafo
         int c = 0;
         int s;
         boolean flag = false;
-        
+
         for (int i = 0; i < arestas.size() && !flag; i++)
         {
             s = arestas.get(i).getSomaVertices();
@@ -203,47 +209,138 @@ public class Grafo
         }
         return flag;
     }
-    
-    public boolean gfsimplesAdjacencia(int [][]mat)
+
+    public boolean gfsimplesAdjacencia(int[][] mat)
     {
-        for (int i = 0; i < mat[0].length; i++) 
+        for (int i = 0; i < mat[0].length; i++)
         {
-            if(mat[i][i] != 0)
-                return false;    
+            if (mat[i][i] != 0)
+            {
+                return false;
+            }
         }
         return true;
     }
-    
-    public boolean gfsimplesIncidencia(int [][]mat)
+
+    public boolean gfsimplesIncidencia(int[][] mat)
     {
-        Vertice or,dst;
+        Vertice or, dst;
         Aresta aaux;
         for (int i = 0; i < arestas.size(); i++)
+        {
+            aaux = arestas.get(i);
+            or = aaux.getV1();
+            dst = aaux.getV2();
+
+            if (or == dst)
             {
-                aaux = arestas.get(i);
-                or = aaux.getV1();
-                dst = aaux.getV2();
-                
-                if(or == dst)
-                    return false;
+                return false;
             }
+        }
         return true;
     }
-        public boolean gfsimplesLista(List<List<String>> lista)// arrumando
+
+    public boolean gfsimplesLista(List<List<String>> lista)
     {
-        Vertice or,dst;
+        List<String> list;
+        Aresta aaux;
+        String r;
+        boolean flag = true;
+        int c;
+        for (int i = 0; i < lista.size() && flag; i++)
+        {
+            list = lista.get(i);
+            r = list.toString();
+            c = r.length();
+            r = r.replaceAll(Character.toString(r.charAt(1)), "");
+            if (c == r.length() - 1)
+            {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    public boolean gfCompletoLista(List<List<String>> lista)
+    {
+        List<String> list;
+        Aresta aaux;
+        String r;
+        boolean flag = true;
+        int c;
+        for (int i = 0; i < lista.size() && flag; i++)
+        {
+            list = lista.get(i);
+            r = list.toString();
+            for (int j = 0; j < vertices.size() && flag; j++)
+            {
+                flag = r.contains(vertices.get(j).getText());
+            }
+        }
+        return flag;
+    }
+
+    public boolean gfCompletoAdjacencia(int[][] mat)
+    {
+        boolean flag = true;
+        for (int i = 0; i < mat.length && flag; i++)
+        {
+            for (int j = 0; j < mat[0].length && flag; j++)
+            {
+                if (i != j)
+                {
+                    flag = (mat[i][j] != 0);
+                }
+            }
+        }
+        return flag;
+    }
+
+    public boolean gfCompletoIncidencia(int[][] mat)//arrumar 28/08/2019
+    {
+        Vertice or, dst;
         Aresta aaux;
         for (int i = 0; i < arestas.size(); i++)
+        {
+            aaux = arestas.get(i);
+            or = aaux.getV1();
+            dst = aaux.getV2();
+
+            if (or == dst)
             {
-                aaux = arestas.get(i);
-                or = aaux.getV1();
-                dst = aaux.getV2();
-                
-                if(or == dst)
-                    return false;
+                return false;
             }
+        }
         return true;
     }
-    
-   
+    //////////////////////regular
+    public boolean gfRegularAdjacencia(int[][] mat)
+    {
+        int c = 0, maior = 0;
+        boolean flag = true;
+        if(mat.length > 0)
+        {
+            for (int i = 0; i < mat[0].length; i++)
+            {
+                if(mat[0][i] != 0)
+                    maior++;
+            }
+        }
+        for (int i = 1; i < mat.length && flag; i++)
+        {
+            c = 0;
+            for (int j = 0; j < mat[0].length && flag; j++)
+            {
+                if(mat[i][j] != 0)
+                {
+                    c++;
+                }
+            }
+            if (maior != c)
+            {
+                flag = false;
+            }
+        }
+        return flag;
+    }
 }

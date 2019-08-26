@@ -159,6 +159,7 @@ public class TelaPrincipalController implements Initializable
         {
             //////////////////////////////////////////////////MA
             int[][] ma = gf.getMatrizAdjacencia();
+            gf.gfRegularAdjacencia(ma);
             //System.out.println(Arrays.deepToString(ma));
             List<String> lr = gf.getListaRotulos();
             String saidaMA = "[-]\t" + lr.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";

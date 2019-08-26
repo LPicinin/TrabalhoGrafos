@@ -173,7 +173,18 @@ public class Vertice extends JFXButton
         hash = 13 * hash + this.id;
         return hash;
     }
-
+    public int getGrau()
+    {
+        int g = 0;
+        for (Aresta aresta : TelaPrincipalController.arestas)
+        {
+            if(aresta.getV1() == this)
+            {
+                g++;
+            }
+        }
+        return g;
+    }
     private void iniciaInfos()
     {
         setFocusTraversable(false);
