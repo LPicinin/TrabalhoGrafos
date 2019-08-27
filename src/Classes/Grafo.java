@@ -296,10 +296,25 @@ public class Grafo
         return flag;
     }
 
-    public boolean gfCompletoIncidencia(int[][] mat)//arrumar 28/08/2019
+    public boolean gfCompletoIncidencia(int[][] mat)
     {
         Vertice or, dst;
         Aresta aaux;
+        int c;
+        boolean flag = true;
+        for (int i = 0; i < mat.length && flag; i++)
+        {
+            c = 0;
+            for (int j = 0; j < mat[0].length; j++)
+            {
+                if (mat[i][j] != 0)
+                {
+                    c++;
+                }
+            }
+            flag = c == vertices.size() - 1;
+        }
+        /*
         for (int i = 0; i < arestas.size(); i++)
         {
             aaux = arestas.get(i);
@@ -312,18 +327,23 @@ public class Grafo
             }
         }
         return true;
+         */
+        return flag;
     }
+
     //////////////////////regular
-    public boolean gfRegularAdjacencia(int[][] mat)
+    public Integer gfRegularAdjacencia(int[][] mat)
     {
         int c = 0, maior = 0;
         boolean flag = true;
-        if(mat.length > 0)
+        if (mat.length > 0)
         {
             for (int i = 0; i < mat[0].length; i++)
             {
-                if(mat[0][i] != 0)
+                if (mat[0][i] != 0)
+                {
                     maior++;
+                }
             }
         }
         for (int i = 1; i < mat.length && flag; i++)
@@ -331,7 +351,7 @@ public class Grafo
             c = 0;
             for (int j = 0; j < mat[0].length && flag; j++)
             {
-                if(mat[i][j] != 0)
+                if (mat[i][j] != 0)
                 {
                     c++;
                 }
@@ -341,6 +361,52 @@ public class Grafo
                 flag = false;
             }
         }
-        return flag;
+        return (flag)? maior : null;
     }
+
+    public Integer gfRegularIncidencia(int[][] mat)
+    {
+        int c = 0, maior = 0;
+        boolean flag = true;
+        if (mat.length > 0)
+        {
+            for (int i = 0; i < mat[0].length; i++)
+            {
+                if (mat[0][i] != 0)
+                {
+                    maior++;
+                }
+            }
+        }
+        for (int i = 1; i < mat.length && flag; i++)
+        {
+            c = 0;
+            for (int j = 0; j < mat[0].length && flag; j++)
+            {
+                if (mat[i][j] != 0)
+                {
+                    c++;
+                }
+            }
+            if (maior != c)
+            {
+                flag = false;
+            }
+        }
+        return (flag)? maior : null;
+    }
+    public Integer gfRegularLista(List<List<String>> lista)
+    {
+        boolean flag = true;
+        List<String> max = null;
+        if(lista.size() > 0)
+            max = lista.get(0);
+        for (int i = 0;i < lista.size() && flag; i++)
+        {
+            if(max.size() != lista.get(i).size())
+                flag = false;
+        }
+        return (flag)? ((max != null)? max.size()-1 : 0) : null;
+    }
+
 }

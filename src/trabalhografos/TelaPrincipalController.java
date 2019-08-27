@@ -1,4 +1,3 @@
-
 package trabalhografos;
 
 import Classes.Aresta;
@@ -18,7 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -58,6 +59,32 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private JFXTextField txval;
     public static JFXTextField stxval;
+    @FXML
+    private ImageView imgvSimples;
+    private static ImageView simgvSimples;
+    @FXML
+    private ImageView imgvRegular;
+    private static ImageView simgvRegular;
+    @FXML
+    private ImageView imgvCompleto;
+    private static ImageView simgvCompleto;
+    @FXML
+    private ToggleGroup classificacaoGroup;
+    @FXML
+    private JFXRadioButton rbMA;
+    private static JFXRadioButton srbMA;
+    @FXML
+    private JFXRadioButton rbMi;
+    private static JFXRadioButton srbMi;
+    @FXML
+    private JFXRadioButton rbLista;
+    private static JFXRadioButton srbLista;
+    @FXML
+    private Label lblKCompleto;
+    private static Label slblKCompleto;
+    @FXML
+    private Label lblGrauRegular;
+    private static Label slblGrauRegular;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -72,6 +99,17 @@ public class TelaPrincipalController implements Initializable
         stxMI = txMI;
         stxval = txval;
         stxLista = txLista;
+        
+        srbMA = rbMA;
+        srbMi = rbMi;
+        srbLista = rbLista;
+        
+        simgvCompleto = imgvCompleto;
+        simgvRegular = imgvRegular;
+        simgvSimples = imgvSimples;
+        
+        slblGrauRegular = lblGrauRegular;
+        slblKCompleto = lblKCompleto;
         sequencia = 0;
     }
 
@@ -203,6 +241,8 @@ public class TelaPrincipalController implements Initializable
                 saidaLA += list.toString().replace(",", "->") + "\n";
             }
             stxLista.setText(saidaLA);
+            
+            verifica_Tipo(ma, mi, la);
 
         } catch (Exception ex)
         {
@@ -232,4 +272,75 @@ public class TelaPrincipalController implements Initializable
         }
     }
 
+    @FXML
+    private void evtMA_Option(MouseEvent event)
+    {
+        verifica_Tipo(gf.getMatrizAdjacencia(), null, null);
+    }
+
+    @FXML
+    private void evtMI_Option(MouseEvent event)
+    {
+        verifica_Tipo(null,gf.getMatrizIncidencia(), null);
+    }
+
+    @FXML
+    private void evtLista_Option(MouseEvent event)
+    {
+        verifica_Tipo(null, null, gf.getListaAdjacencia());
+    }
+
+    private static void verifica_Tipo(int[][] ma, int[][] mi, List<List<String>> lista)
+    {
+        Integer grau;
+        if (srbMA.selectedProperty().get())
+        {
+            simgvSimples.setVisible(gf.gfsimplesAdjacencia(ma));
+            if((grau = gf.gfRegularAdjacencia(ma)) != null)
+            {
+                simgvRegular.setVisible(true);
+                slblGrauRegular.setText("G = "+grau.toString());
+            }
+            else
+            {
+                simgvRegular.setVisible(false);
+                slblGrauRegular.setText("");
+            }
+                
+            simgvCompleto.setVisible(gf.gfCompletoAdjacencia(ma));
+        }
+        else if(srbMi.selectedProperty().get())
+        {
+            simgvSimples.setVisible(gf.gfsimplesIncidencia(mi));
+            
+            if((grau = gf.gfRegularIncidencia(mi)) != null)
+            {
+                simgvRegular.setVisible(true);
+                slblGrauRegular.setText("G = "+grau.toString());
+            }
+            else
+            {
+                simgvRegular.setVisible(false);
+                slblGrauRegular.setText("");
+            }
+                
+            simgvCompleto.setVisible(gf.gfCompletoIncidencia(mi));
+        }
+        else
+        {
+            simgvSimples.setVisible(gf.gfsimplesLista(lista));
+            
+            if((grau = gf.gfRegularLista(lista)) != null)
+            {
+                simgvRegular.setVisible(true);
+                slblGrauRegular.setText("G = "+grau.toString());
+            }
+            else
+            {
+                simgvRegular.setVisible(false);
+                slblGrauRegular.setText("");
+            }
+            simgvCompleto.setVisible(gf.gfCompletoLista(lista));
+        }
+    }
 }
