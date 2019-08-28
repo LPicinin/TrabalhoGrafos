@@ -10,8 +10,11 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -292,22 +295,43 @@ public class TelaPrincipalController implements Initializable
 
     private static void verifica_Tipo(int[][] ma, int[][] mi, List<List<String>> lista)
     {
-        Integer grau;
+        Integer []grau;
+        Integer g;
+        Integer k;
+        Integer s = 0;
+        /*for (int i = 0; i < ma.length; i++) {
+            s += Arrays.stream(ma[i]).sum();
+        }*/
         if (srbMA.selectedProperty().get())
         {
             simgvSimples.setVisible(gf.gfsimplesAdjacencia(ma));
-            if((grau = gf.gfRegularAdjacencia(ma)) != null)
+            if((grau = gf.gfRegularAdjacencia(ma)) != null  /*&& s != 0*/)
             {
                 simgvRegular.setVisible(true);
-                slblGrauRegular.setText("G = "+grau.toString());
+                if(grau[0] != grau[1])
+                {
+                    if(grau[0] > 0)
+                        slblGrauRegular.setText("E = "+grau[0].toString());//"G = "+grau[0].toString()+
+                    else
+                        slblGrauRegular.setText("R = "+grau[1].toString());
+                }
             }
             else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-                
-            simgvCompleto.setVisible(gf.gfCompletoAdjacencia(ma));
+            if(gf.gfCompletoAdjacencia(ma))
+            {
+                simgvCompleto.setVisible(true);
+                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
+            }
+            else
+            {
+                simgvCompleto.setVisible(false);
+                slblKCompleto.setText("");
+            }
+            
         }
         else if(srbMi.selectedProperty().get())
         {
@@ -316,31 +340,56 @@ public class TelaPrincipalController implements Initializable
             if((grau = gf.gfRegularIncidencia(mi)) != null)
             {
                 simgvRegular.setVisible(true);
-                slblGrauRegular.setText("G = "+grau.toString());
+                if(!Objects.equals(grau[0], grau[1]))
+                {
+                    if(grau[0] > 0)
+                        slblGrauRegular.setText("E = "+grau[0].toString());//"G = "+grau[0].toString()+
+                    else
+                        slblGrauRegular.setText("R = "+grau[1].toString());
+                }
+                //slblGrauRegular.setText("G = "+grau.toString());
             }
             else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-                
-            simgvCompleto.setVisible(gf.gfCompletoIncidencia(mi));
+            if(gf.gfCompletoIncidencia(mi))
+            {
+                simgvCompleto.setVisible(true);
+                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
+            }
+            else
+            {
+                simgvCompleto.setVisible(false);
+                slblKCompleto.setText("");
+            }
+            
         }
         else
         {
             simgvSimples.setVisible(gf.gfsimplesLista(lista));
             
-            if((grau = gf.gfRegularLista(lista)) != null)
+            if((g = gf.gfRegularLista(lista)) != null)
             {
                 simgvRegular.setVisible(true);
-                slblGrauRegular.setText("G = "+grau.toString());
+                slblGrauRegular.setText("G = "+g.toString());
             }
             else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-            simgvCompleto.setVisible(gf.gfCompletoLista(lista));
+            if(gf.gfCompletoLista(lista))
+            {
+                simgvCompleto.setVisible(true);
+                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
+            }
+            else
+            {
+                simgvCompleto.setVisible(false);
+                slblKCompleto.setText("");
+            }
         }
     }
 }

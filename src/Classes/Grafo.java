@@ -192,9 +192,9 @@ public class Grafo
     {
         int c = 0;
         int s;
-        boolean flag = false;
+        boolean flag = true;
 
-        for (int i = 0; i < arestas.size() && !flag; i++)
+        for (int i = 0; i < arestas.size() && flag; i++)
         {
             s = arestas.get(i).getSomaVertices();
             c = 0;
@@ -332,9 +332,9 @@ public class Grafo
     }
 
     //////////////////////regular
-    public Integer gfRegularAdjacencia(int[][] mat)
+    public Integer[] gfRegularAdjacencia(int[][] mat)
     {
-        int c = 0, maior = 0;
+        int c = 0, maiore = 0, maiorr = 0;
         boolean flag = true;
         if (mat.length > 0)
         {
@@ -342,8 +342,13 @@ public class Grafo
             {
                 if (mat[0][i] != 0)
                 {
-                    maior++;
+                    maiore++;
                 }
+            }
+            for (int i = 0; i < mat.length; i++) 
+            {
+                if(mat[i][0] != 0)
+                    maiorr++;
             }
         }
         for (int i = 1; i < mat.length && flag; i++)
@@ -356,17 +361,17 @@ public class Grafo
                     c++;
                 }
             }
-            if (maior != c)
+            if (maiore != c)
             {
                 flag = false;
             }
         }
-        return (flag)? maior : null;
+        return (flag)? new Integer[]{maiore, maiorr} : null;
     }
 
-    public Integer gfRegularIncidencia(int[][] mat)
+    public Integer[] gfRegularIncidencia(int[][] mat)
     {
-        int c = 0, maior = 0;
+        int c = 0, maiore = 0, maiorr = 0;
         boolean flag = true;
         if (mat.length > 0)
         {
@@ -374,7 +379,15 @@ public class Grafo
             {
                 if (mat[0][i] != 0)
                 {
-                    maior++;
+                    maiore++;
+                }
+            }
+            
+            for (int i = 0; i < mat.length; i++)
+            {
+                if (mat[0][i] != 0)
+                {
+                    maiorr++;
                 }
             }
         }
@@ -388,12 +401,12 @@ public class Grafo
                     c++;
                 }
             }
-            if (maior != c)
+            if (maiore != c)
             {
                 flag = false;
             }
         }
-        return (flag)? maior : null;
+        return (flag)? new Integer[]{maiore, maiorr} : null;
     }
     public Integer gfRegularLista(List<List<String>> lista)
     {
