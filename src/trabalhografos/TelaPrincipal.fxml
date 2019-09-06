@@ -5,6 +5,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,85 +18,117 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="909.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabalhografos.TelaPrincipalController">
    <bottom>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="909.0">
-               <children>
-                  <ImageView fitHeight="85.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/einstain.gif" />
-                     </image>
-                  </ImageView>
-                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+      <TabPane BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab closable="false" text="1ªParte">
+               <content>
+                  <VBox>
                      <children>
-                        <ImageView fx:id="imgvSimples" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                           <image>
-                              <Image url="@../img/plasm_ball.gif" />
-                           </image>
-                        </ImageView>
-                        <Label text="Simples" />
+                        <HBox alignment="CENTER" prefHeight="63.0" prefWidth="909.0">
+                           <children>
+                              <ImageView fitHeight="85.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/einstain.gif" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                                 <children>
+                                    <ImageView fx:id="imgvSimples" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../img/plasm_ball.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Simples" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                                 <children>
+                                    <ImageView fx:id="imgvRegular" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../img/plasm_ball.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Regular" />
+                                 </children>
+                              </VBox>
+                              <Label fx:id="lblGrauRegular" />
+                              <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+                                 <children>
+                                    <ImageView fx:id="imgvCompleto" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../img/plasm_ball.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Completo" />
+                                 </children>
+                              </VBox>
+                              <Label fx:id="lblKCompleto" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="909.0" spacing="25.0">
+                           <children>
+                              <Label text="CLassificar Por:" />
+                              <JFXRadioButton fx:id="rbMA" focusTraversable="false" onMouseClicked="#evtMA_Option" selected="true" text="MA">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="classificacaoGroup" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rbMi" focusTraversable="false" onMouseClicked="#evtMI_Option" text="MI" toggleGroup="$classificacaoGroup" />
+                              <JFXRadioButton fx:id="rbLista" focusTraversable="false" onMouseClicked="#evtLista_Option" text="Lista" toggleGroup="$classificacaoGroup" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="25.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                                 <children>
+                                    <Label text="MA" />
+                                    <JFXTextArea fx:id="txMA" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                                 <children>
+                                    <Label text="MI" />
+                                    <JFXTextArea fx:id="txMI" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                                 <children>
+                                    <Label text="Lista" />
+                                    <JFXTextArea fx:id="txLista" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
+               </content>
+            </Tab>
+            <Tab closable="false" text="2ªParte">
+               <content>
+                  <VBox alignment="CENTER">
                      <children>
-                        <ImageView fx:id="imgvRegular" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                           <image>
-                              <Image url="@../img/plasm_ball.gif" />
-                           </image>
-                        </ImageView>
-                        <Label text="Regular" />
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="195.0" prefWidth="909.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="228.0" prefWidth="3000.0" style="-fx-border-color: red;">
+                                 <children>
+                                    <Label text="Articulação" />
+                                    <JFXTextArea fx:id="txArticulacao" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
+                                 <children>
+                                    <Label text="Coloração" />
+                                    <JFXTextArea fx:id="txColoracao" editable="false" focusTraversable="false" labelFloat="true" prefHeight="175.0" prefWidth="453.0" style="-fx-border-color: black;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="lblGrauRegular" />
-                  <VBox alignment="CENTER" prefHeight="63.0" prefWidth="62.0">
-                     <children>
-                        <ImageView fx:id="imgvCompleto" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                           <image>
-                              <Image url="@../img/plasm_ball.gif" />
-                           </image>
-                        </ImageView>
-                        <Label text="Completo" />
-                     </children>
-                  </VBox>
-                  <Label fx:id="lblKCompleto" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="909.0" spacing="25.0">
-               <children>
-                  <Label text="CLassificar Por:" />
-                  <JFXRadioButton fx:id="rbMA" focusTraversable="false" onMouseClicked="#evtMA_Option" selected="true" text="MA">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="classificacaoGroup" />
-                     </toggleGroup>
-                  </JFXRadioButton>
-                  <JFXRadioButton fx:id="rbMi" focusTraversable="false" onMouseClicked="#evtMI_Option" text="MI" toggleGroup="$classificacaoGroup" />
-                  <JFXRadioButton fx:id="rbLista" focusTraversable="false" onMouseClicked="#evtLista_Option" text="Lista" toggleGroup="$classificacaoGroup" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="631.0" spacing="25.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
-                     <children>
-                        <Label text="MA" />
-                        <JFXTextArea fx:id="txMA" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
-                     <children>
-                        <Label text="MI" />
-                        <JFXTextArea fx:id="txMI" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefWidth="3000.0" style="-fx-border-color: red;">
-                     <children>
-                        <Label text="Lista" />
-                        <JFXTextArea fx:id="txLista" editable="false" focusTraversable="false" labelFloat="true" prefWidth="250.0" style="-fx-border-color: black;" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </bottom>
    <top>
       <BorderPane prefHeight="69.0" prefWidth="909.0" BorderPane.alignment="CENTER">

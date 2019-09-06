@@ -7,6 +7,7 @@ import Classes.Vertice;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -114,6 +116,7 @@ public class TelaPrincipalController implements Initializable
         slblGrauRegular = lblGrauRegular;
         slblKCompleto = lblKCompleto;
         sequencia = 0;
+        //FontAwesomeIcon.CUT
     }
 
     @FXML
