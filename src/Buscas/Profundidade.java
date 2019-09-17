@@ -43,6 +43,7 @@ public class Profundidade extends Busca
             if(vizitados[listaAux.get(i).getValue()])//já vizitou todas as ligações do vertice
             {
                 //???
+                pilha.pop();
             }
             else
             {
