@@ -6,8 +6,12 @@
 package Buscas;
 
 import Buscas.Estrutura.No;
+import Buscas.Estrutura.Node;
+import Buscas.Estrutura.Tree;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,16 +19,22 @@ import java.util.List;
  */
 public abstract class Busca
 {
+    protected Tree arv;
     protected List<List<No>> eb;//estruturaBusca
     protected static int maiorVertice;
+
+    public Busca()
+    {
+        arv = new Tree();
+    }
     
-    public  final String buscar(List<List<String>> la)
+    public  final void buscar(List<List<String>> la)
     {
         eb = converteEstrutura(la);
-        return buscaPriv();
+        buscaPriv();
     }
 
-    private static List<List<No>> converteEstrutura(List<List<String>> la)
+    public static List<List<No>> converteEstrutura(List<List<String>> la)
     {
         List<List<No>> estruturaBusca = new ArrayList<>();//
         int i = 0;
@@ -46,7 +56,7 @@ public abstract class Busca
         return estruturaBusca;
     }
 
-    protected abstract String buscaPriv();
+    protected abstract void buscaPriv();
     protected final List<No> getNoMAiorGrau()
     {
         List<No> Mlist = null;
@@ -70,4 +80,16 @@ public abstract class Busca
         }
         return item;
     }
+
+    public Tree getArv()
+    {
+        return arv;
+    }
+
+    public int[][] getMatrixArticulation()
+    {
+        return arv.getMatrixArticulacao(eb.size());
+    }
+    
+    
 }

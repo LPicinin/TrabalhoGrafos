@@ -1,5 +1,7 @@
 package trabalhografos;
 
+import Buscas.Busca;
+import Buscas.Profundidade;
 import Classes.Aresta;
 import Classes.Grafo;
 import Classes.Recursao;
@@ -100,15 +102,15 @@ public class TelaPrincipalController implements Initializable
         stxMI = txMI;
         stxval = txval;
         stxLista = txLista;
-        
+
         srbMA = rbMA;
         srbMi = rbMi;
         srbLista = rbLista;
-        
+
         simgvCompleto = imgvCompleto;
         simgvRegular = imgvRegular;
         simgvSimples = imgvSimples;
-        
+
         slblGrauRegular = lblGrauRegular;
         slblKCompleto = lblKCompleto;
         sequencia = 0;
@@ -243,8 +245,15 @@ public class TelaPrincipalController implements Initializable
                 saidaLA += list.toString().replace(",", "->") + "\n";
             }
             stxLista.setText(saidaLA);
-            
+
             verifica_Tipo(ma, mi, la);
+
+            ///////////////////matriz de articulação
+            
+            Busca b = new Profundidade();
+            b.buscar(la);
+            int[][] matrizA = b.getMatrixArticulation();
+            
 
         } catch (Exception ex)
         {
@@ -283,7 +292,7 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private void evtMI_Option(MouseEvent event)
     {
-        verifica_Tipo(null,gf.getMatrizIncidencia(), null);
+        verifica_Tipo(null, gf.getMatrizIncidencia(), null);
     }
 
     @FXML
@@ -294,7 +303,7 @@ public class TelaPrincipalController implements Initializable
 
     private static void verifica_Tipo(int[][] ma, int[][] mi, List<List<String>> lista)
     {
-        Integer []grau;
+        Integer[] grau;
         Integer g;
         Integer k;
         Integer s = 0;
@@ -304,87 +313,85 @@ public class TelaPrincipalController implements Initializable
         if (srbMA.selectedProperty().get())
         {
             simgvSimples.setVisible(gf.gfsimplesAdjacencia(ma));
-            if((grau = gf.gfRegularAdjacencia(ma)) != null  /*&& s != 0*/)
+            if ((grau = gf.gfRegularAdjacencia(ma)) != null /*&& s != 0*/)
             {
                 simgvRegular.setVisible(true);
-                if(grau[0] != grau[1])
+                if (grau[0] != grau[1])
                 {
-                    if(grau[0] > 0)
-                        slblGrauRegular.setText("E = "+grau[0].toString());//"G = "+grau[0].toString()+
-                    else
-                        slblGrauRegular.setText("R = "+grau[1].toString());
+                    if (grau[0] > 0)
+                    {
+                        slblGrauRegular.setText("E = " + grau[0].toString());//"G = "+grau[0].toString()+
+                    } else
+                    {
+                        slblGrauRegular.setText("R = " + grau[1].toString());
+                    }
                 }
-            }
-            else
+            } else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-            if(gf.gfCompletoAdjacencia(ma))
+            if (gf.gfCompletoAdjacencia(ma))
             {
                 simgvCompleto.setVisible(true);
-                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
-            }
-            else
+                slblKCompleto.setText("K = " + Integer.toString(vertices.size()));
+            } else
             {
                 simgvCompleto.setVisible(false);
                 slblKCompleto.setText("");
             }
-            
-        }
-        else if(srbMi.selectedProperty().get())
+
+        } else if (srbMi.selectedProperty().get())
         {
             simgvSimples.setVisible(gf.gfsimplesIncidencia(mi));
-            
-            if((grau = gf.gfRegularIncidencia(mi)) != null)
+
+            if ((grau = gf.gfRegularIncidencia(mi)) != null)
             {
                 simgvRegular.setVisible(true);
-                if(!Objects.equals(grau[0], grau[1]))
+                if (!Objects.equals(grau[0], grau[1]))
                 {
-                    if(grau[0] > 0)
-                        slblGrauRegular.setText("E = "+grau[0].toString());//"G = "+grau[0].toString()+
-                    else
-                        slblGrauRegular.setText("R = "+grau[1].toString());
+                    if (grau[0] > 0)
+                    {
+                        slblGrauRegular.setText("E = " + grau[0].toString());//"G = "+grau[0].toString()+
+                    } else
+                    {
+                        slblGrauRegular.setText("R = " + grau[1].toString());
+                    }
                 }
                 //slblGrauRegular.setText("G = "+grau.toString());
-            }
-            else
+            } else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-            if(gf.gfCompletoIncidencia(mi))
+            if (gf.gfCompletoIncidencia(mi))
             {
                 simgvCompleto.setVisible(true);
-                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
-            }
-            else
+                slblKCompleto.setText("K = " + Integer.toString(vertices.size()));
+            } else
             {
                 simgvCompleto.setVisible(false);
                 slblKCompleto.setText("");
             }
-            
-        }
-        else
+
+        } else
         {
             simgvSimples.setVisible(gf.gfsimplesLista(lista));
-            
-            if((g = gf.gfRegularLista(lista)) != null)
+
+            if ((g = gf.gfRegularLista(lista)) != null)
             {
                 simgvRegular.setVisible(true);
-                slblGrauRegular.setText("G = "+g.toString());
-            }
-            else
+                slblGrauRegular.setText("G = " + g.toString());
+            } else
             {
                 simgvRegular.setVisible(false);
                 slblGrauRegular.setText("");
             }
-            if(gf.gfCompletoLista(lista))
+            if (gf.gfCompletoLista(lista))
             {
                 simgvCompleto.setVisible(true);
-                slblKCompleto.setText("K = "+Integer.toString(vertices.size()));
-            }
-            else
+                slblKCompleto.setText("K = " + Integer.toString(vertices.size()));
+            } else
             {
                 simgvCompleto.setVisible(false);
                 slblKCompleto.setText("");
