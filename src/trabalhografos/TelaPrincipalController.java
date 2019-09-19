@@ -197,8 +197,8 @@ public class TelaPrincipalController implements Initializable
             System.out.println(vertice.getText() + ": " + vertice.getID());
         }
         System.out.println("------------------");
-        try
-        {
+        /*try
+        {*/
             //////////////////////////////////////////////////MA
             int[][] ma = gf.getMatrizAdjacencia();
             gf.gfRegularAdjacencia(ma);
@@ -252,14 +252,16 @@ public class TelaPrincipalController implements Initializable
             
             Busca b = new Profundidade();
             b.buscar(la);
-            int[][] matrizA = b.getMatrixArticulation();
             
-
+            if(vertices.size() >= 6 && arestas.size()>=8)
+                b.getArv().processaCores();
+            
+/*
         } catch (Exception ex)
         {
             System.out.println(ex.getCause());
         }
-
+*/
     }
 
     @FXML

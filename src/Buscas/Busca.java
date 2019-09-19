@@ -43,13 +43,13 @@ public abstract class Busca
         for (List<String> list : la)
         {
             estruturaBusca.add(new ArrayList<>());
-            String []vs = (String[]) list.toArray();
-            for (int j = 1; j < vs.length; j++)
+            //String []vs = (String[]) list.toArray();
+            for (int j = 0; j < list.size(); j++)
             {
-                c = vs[j].charAt(0);
+                c = list.get(j).charAt(0);
                 estruturaBusca.get(i).add(new No(c));
-                if(maiorVertice < c - 'a')
-                    maiorVertice = c - 'a';
+                if(maiorVertice < c - 'A')
+                    maiorVertice = c - 'A';
             }
             i++;
         }

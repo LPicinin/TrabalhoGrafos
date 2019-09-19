@@ -24,7 +24,7 @@ public class No
     }
     public int getValue()
     {
-        return info-'a';
+        return info - 'A';
     }
     public void setInfo(char info)
     {
