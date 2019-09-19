@@ -5,6 +5,10 @@
  */
 package Buscas.Estrutura;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -33,9 +37,12 @@ public class Tree
 
     public void insereFilho(Node pai, int info)
     {
+        Node n;
         if (pai != null)
         {
-            pai.getFilhos().add(new Node(info));
+            n = new Node(info);
+            n.setPai(pai);
+            pai.getFilhos().add(n);
         }
         else
         {
@@ -91,5 +98,32 @@ public class Tree
             inOrdem(r.getFilhos().get(r.getFilhos().size()-1));
         }
     }
-    
+    private List<Node> getFolhas()
+    {
+        List<Node> folhas = new ArrayList<>();
+        Queue<Node> fila = new LinkedList<>();
+        Node n;
+        
+        if(raiz != null)
+        {
+            fila.add(raiz);
+            while (!fila.isEmpty()) 
+            {
+               n = fila.remove();
+               
+               if(n.getFilhos().isEmpty())
+               {
+                   folhas.add(n);
+               }
+               else
+               {
+                   for (Node filho : n.getFilhos()) 
+                   {
+                       fila.add(filho);
+                   }
+               }
+            }
+        }
+        return folhas;
+    }
 }
