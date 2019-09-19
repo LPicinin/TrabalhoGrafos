@@ -256,7 +256,7 @@ public class TelaPrincipalController implements Initializable
 
         if (vertices.size() >= 6 && arestas.size() >= 8)
         {
-            b.getArv().processaCores(vertices.size() + 1);
+            b.processaCoresBusca();
 
             vertices.sort((t, t1) ->
             {

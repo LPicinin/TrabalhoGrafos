@@ -6,13 +6,11 @@
 package Buscas;
 
 import Buscas.Estrutura.No;
-import Buscas.Estrutura.Node;
 import Buscas.Estrutura.Tree;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
-import java.util.logging.Logger;
 import javafx.scene.paint.Color;
 
 /**
@@ -128,12 +126,14 @@ public abstract class Busca
             {
                 lista_Aux.get(j).getCoresNegadas().add(aux.getCor());
             }
-            for (i = 0; i < lista_Aux.size() && coresV[lista_Aux.get(i).getValue()] != null; i++)
+            for (i = 1; i < lista_Aux.size() && coresV[lista_Aux.get(i).getValue()] != null; i++)
             {
             }
             if (i < lista_Aux.size())
             {
                 lista_Aux = getlistForIndex(lista_Aux.get(i).getValue());
+                if(aux.getInfo() == 'C')
+                    System.out.println("hum");
                 Color nc = getCorNaoListada(lista_Aux);
                 lista_Aux.get(0).setCor(nc);
                 coresV[lista_Aux.get(0).getValue()] = nc;
@@ -161,7 +161,8 @@ public abstract class Busca
             if (coresV[no.getValue()] != null)
             {
                 index = cores.indexOf(coresV[no.getValue()]);
-                cores.remove(index);
+                if(index >= 0)
+                    cores.remove(index);
             }
         }
         return cores.get(0);
