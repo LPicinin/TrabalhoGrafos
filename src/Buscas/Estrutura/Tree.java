@@ -7,7 +7,6 @@ package Buscas.Estrutura;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -24,8 +23,9 @@ public class Tree
     private Node raiz;
     private final Color[] c = new Color[]
     {
-        Color.BLUE, Color.RED, Color.YELLOW, Color.CHOCOLATE
+        Color.color(1, 0, 0), Color.color(0, 1, 0), Color.color(0, 0, 1), Color.color(0, 1, 1)
     };
+    private Color[] cr;
 
     public Tree(Node raiz)
     {
@@ -76,13 +76,12 @@ public class Tree
                     {
                         N_achou = false;
                         r = aux.getFilhos().get(i);
-                    }
-                    else
+                    } else
                     {
                         pilha.push(aux.getFilhos().get(i));
                     }
                 }
-                
+
             }
         }
         return r;
@@ -94,8 +93,9 @@ public class Tree
 
     }
 
-    public void processaCores()
+    public void processaCores(int tl_vertice)
     {
+        cr = new Color[tl_vertice];
         setCores(raiz);
     }
 
@@ -107,7 +107,10 @@ public class Tree
             if (raiz == n)
             {
                 n.setCor(c[0]);
-                System.out.println("Raiz = "+ n.getCor().toString());
+                cr[n.getInfo()] = c[0];
+                //
+                n.setCor(cr[n.getInfo()]);
+                //
             } else
             {
                 int index = cores.indexOf(n.getPai().getCor());
@@ -116,14 +119,21 @@ public class Tree
                 {
                     if (filho.getCor() != null)
                     {
-                        cores.remove(filho.getCor());
+                        index = cores.indexOf(filho.getCor());
+                        cores.remove(index);
                     }
                 }
                 if (cores.size() > 0)
                 {
                     n.setCor(cores.get(0));
-                    char c=(char)('A' + n.getInfo());
-                    System.out.println(c+" = "+ n.getCor().toString());
+                    cr[n.getInfo()] = cores.get(0);
+                    //
+                    n.setCor(cr[n.getInfo()]);
+                    //
+                    char c = (char) ('A' + n.getInfo());
+                } else
+                {
+                    char c = (char) ('A' + n.getInfo());
                 }
 
             }
@@ -183,4 +193,10 @@ public class Tree
         }
         return folhas;
     }
+
+    public Color[] getCr()
+    {
+        return cr;
+    }
+
 }

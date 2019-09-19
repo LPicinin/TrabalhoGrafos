@@ -1,6 +1,7 @@
 package trabalhografos;
 
 import Buscas.Busca;
+import Buscas.Estrutura.Node;
 import Buscas.Profundidade;
 import Classes.Aresta;
 import Classes.Grafo;
@@ -26,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class TelaPrincipalController implements Initializable
@@ -199,69 +201,87 @@ public class TelaPrincipalController implements Initializable
         System.out.println("------------------");
         /*try
         {*/
-            //////////////////////////////////////////////////MA
-            int[][] ma = gf.getMatrizAdjacencia();
-            gf.gfRegularAdjacencia(ma);
-            //System.out.println(Arrays.deepToString(ma));
-            List<String> lr = gf.getListaRotulos();
-            String saidaMA = "[-]\t" + lr.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
-            for (int i = 0; i < ma.length; i++)
+        //////////////////////////////////////////////////MA
+        int[][] ma = gf.getMatrizAdjacencia();
+        gf.gfRegularAdjacencia(ma);
+        //System.out.println(Arrays.deepToString(ma));
+        List<String> lr = gf.getListaRotulos();
+        String saidaMA = "[-]\t" + lr.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
+        for (int i = 0; i < ma.length; i++)
+        {
+            saidaMA += "[" + lr.get(i) + "]\t";
+            for (int j = 0; j < ma[0].length; j++)
             {
-                saidaMA += "[" + lr.get(i) + "]\t";
-                for (int j = 0; j < ma[0].length; j++)
+                //saidaMA += Integer.toString(ma[i][j]);
+                saidaMA += ma[i][j] + " ";
+            }
+            saidaMA += "\n";
+        }
+        stxMA.setText(saidaMA);
+
+        /////////////////////////////////////////////////MI
+        int[][] mi = gf.getMatrizIncidencia();
+        List<String> lr2 = gf.getListaRotulosMI();
+        if (arestas.size() > 0)
+        {
+            saidaMA = "[-]\t" + lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
+            for (int i = 0; i < mi.length; i++)
+            {
+                saidaMA += "[" + lr.get(i) + "]\t  ";
+                for (int j = 0; j < mi[0].length; j++)
                 {
-                    //saidaMA += Integer.toString(ma[i][j]);
-                    saidaMA += ma[i][j] + " ";
+                    saidaMA += mi[i][j] + "\t";
                 }
                 saidaMA += "\n";
             }
-            stxMA.setText(saidaMA);
+            stxMI.setText(saidaMA);
+        } else
+        {
+            stxMI.setText("");
+        }
 
-            /////////////////////////////////////////////////MI
-            int[][] mi = gf.getMatrizIncidencia();
-            List<String> lr2 = gf.getListaRotulosMI();
-            if (arestas.size() > 0)
+        List<List<String>> la = gf.getListaAdjacencia();
+        String saidaLA = "";
+        for (List<String> list : la)
+        {
+            saidaLA += list.toString().replace(",", "->") + "\n";
+        }
+        stxLista.setText(saidaLA);
+
+        verifica_Tipo(ma, mi, la);
+
+        ///////////////////matriz de articulação
+        Busca b = new Profundidade();
+        b.buscar(la);
+
+        if (vertices.size() >= 6 && arestas.size() >= 8)
+        {
+            b.getArv().processaCores(vertices.size() + 1);
+
+            vertices.sort((t, t1) ->
             {
-                saidaMA = "[-]\t" + lr2.toString().replace("[", "").replace("]", "").replaceAll(",", "") + "\n";
-                for (int i = 0; i < mi.length; i++)
-                {
-                    saidaMA += "[" + lr.get(i) + "]\t  ";
-                    for (int j = 0; j < mi[0].length; j++)
-                    {
-                        saidaMA += mi[i][j] + "\t";
-                    }
-                    saidaMA += "\n";
-                }
-                stxMI.setText(saidaMA);
-            } else
+                return Character.compare(t.getText().charAt(0), t1.getText().charAt(0));
+            });
+            
+            Color[] cores = b.getCoresV();
+            for (int i = 0; i < vertices.size(); i++)
             {
-                stxMI.setText("");
+                if(cores[i] != null)
+                    vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
             }
-
-            List<List<String>> la = gf.getListaAdjacencia();
-            String saidaLA = "";
-            for (List<String> list : la)
+            Node e = b.getArv().busca(4);
+            System.out.println("Pai e = "+e.getPai().getCor()+"\nFilhos");
+            for (Node filho : e.getFilhos())
             {
-                saidaLA += list.toString().replace(",", "->") + "\n";
+                System.out.println(filho.getCor()+",");
             }
-            stxLista.setText(saidaLA);
+            
+        }
 
-            verifica_Tipo(ma, mi, la);
-
-            ///////////////////matriz de articulação
-            
-            Busca b = new Profundidade();
-            b.buscar(la);
-            
-            if(vertices.size() >= 6 && arestas.size()>=8)
-                b.getArv().processaCores();
-            
-/*
-        } catch (Exception ex)
+        /*} catch (Exception ex)
         {
             System.out.println(ex.getCause());
-        }
-*/
+        }*/
     }
 
     @FXML
