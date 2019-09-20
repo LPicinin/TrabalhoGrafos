@@ -22,7 +22,18 @@ public abstract class Busca
 
     protected final Color[] c = new Color[]
     {
-        Color.color(1, 0, 0), Color.color(0, 1, 0), Color.color(0, 0, 1), Color.color(0, 1, 1)
+        Color.color(1, 0, 0), 
+        Color.color(0, 1, 0), 
+        Color.color(0, 0, 1), 
+        Color.color(0, 1, 1), 
+        Color.color(1, 0, 1),
+        
+        Color.color(0.5, 0, 0),
+        Color.color(0, 0.5, 0),
+        Color.color(0, 0, 0.5),
+        Color.color(0, 0.5, 0.5),
+        Color.color(0.5, 0, 0.5),
+        
     };
     protected Color[] coresV;
     protected Tree arv;
