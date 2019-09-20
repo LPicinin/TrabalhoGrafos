@@ -217,6 +217,7 @@ public class TelaPrincipalController implements Initializable
                 {
                     //saidaMA += Integer.toString(ma[i][j]);
                     saidaMA += ma[i][j] + " ";
+
                 }
                 saidaMA += "\n";
             }
@@ -255,9 +256,9 @@ public class TelaPrincipalController implements Initializable
 
             ///////////////////matriz de articulação
             //if (vertices.size() >= 6 && arestas.size() >= 8)
+            Busca b = new Largura();
             try
             {
-                Busca b = new Largura();
                 b.buscar(la);
                 b.processaCoresBusca();
 
@@ -274,14 +275,20 @@ public class TelaPrincipalController implements Initializable
                         vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
                     }
                 }
-                System.out.println("\n\n\n\n\n\n\n");
-                stxColoracao.setText(Arrays.deepToString(b.getMatriz()));
-            }
-            catch(Exception ex)
+
+            } catch (Exception ex)
             {
                 System.out.println(ex.getCause());
             }
-
+            
+            String sa[] = Arrays.deepToString(b.getMatriz()).replace("[[", "").replace("]]", "").split("\\], \\[");
+            saidaMA = "";
+            for (int i = 0; i < sa.length; i++)
+            {
+                saidaMA += "[" + lr.get(i) + "]\t" + sa[i];
+                saidaMA += "\n";
+            }
+            stxColoracao.setText(saidaMA);
         } catch (Exception ex)
         {
             System.out.println(ex.getCause());
