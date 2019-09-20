@@ -44,9 +44,13 @@ public class Largura extends Busca
         //possivel erro
         vizitados[mElementos.get(0).getValue()] = true;
         arv.init(new Node(mElementos.get(0).getValue()));
-        
-        while (!fila.isEmpty())
+        //Integer proximoGrafo = null;
+        while (!fila.isEmpty() /*&& (proximoGrafo = getPGrafo()) == null*/)
         {
+            /*if(fila.isEmpty())
+            {
+                fila.add(eb.get(proximoGrafo).get(0));
+            }*/
             aux = fila.peek();
             value = aux.getValue();
             listaAux = buscaListaDoELemento(aux.getInfo());
@@ -70,5 +74,16 @@ public class Largura extends Busca
             }
         }
     }
-    
+/*
+    private Integer getPGrafo()
+    {
+        boolean flag = true;
+        int i;
+        for (i = 0; i < this.eb.size() && flag; i++)
+        {
+            flag = coresV[eb.get(i).get(0).getValue()] != null;
+        }
+        return (flag)? i : null;
+    }
+    */
 }
