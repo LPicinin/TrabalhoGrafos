@@ -92,6 +92,11 @@ public class TelaPrincipalController implements Initializable
     @FXML
     private Label lblGrauRegular;
     private static Label slblGrauRegular;
+    @FXML
+    private JFXTextArea txArticulacao;
+    @FXML
+    private JFXTextArea txColoracao;
+    private static JFXTextArea stxColoracao;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -115,6 +120,7 @@ public class TelaPrincipalController implements Initializable
         simgvRegular = imgvRegular;
         simgvSimples = imgvSimples;
 
+        stxColoracao = txColoracao;
         slblGrauRegular = lblGrauRegular;
         slblKCompleto = lblKCompleto;
         sequencia = 0;
@@ -268,11 +274,12 @@ public class TelaPrincipalController implements Initializable
                         vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
                     }
                 }
-                System.out.println(Arrays.deepToString(b.getMatrizColoracao()));
+                System.out.println("\n\n\n\n\n\n\n");
+                stxColoracao.setText(Arrays.deepToString(b.getMatriz()));
             }
             catch(Exception ex)
             {
-                System.out.println("C_F_A");
+                System.out.println(ex.getCause());
             }
 
         } catch (Exception ex)
