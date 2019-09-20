@@ -5,12 +5,13 @@
  */
 package Classes;
 
-import com.jfoenix.controls.JFXButton;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.event.EventHandler;
+import javafx.scene.DepthTest;
+import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import trabalhografos.TelaPrincipalController;
 
@@ -18,7 +19,7 @@ import trabalhografos.TelaPrincipalController;
  *
  * @author Luish
  */
-public class Vertice extends JFXButton
+public class Vertice extends Button
 {
 
     private int id;
@@ -187,11 +188,13 @@ public class Vertice extends JFXButton
     }
     private void iniciaInfos()
     {
+        
         setFocusTraversable(false);
-        setStyle("-fx-padding: 10;\n"
+        /*setStyle("-fx-padding: 10;\n"
                 + "-fx-background-color: gray;\n"
                 + "-fx-border-radius: 30 30 30 30;"
                 + "-fx-background-radius: 50;");
+        */
 
     }
 

@@ -112,7 +112,7 @@ public class Aresta extends Line
         v2x = v2.getLayoutX() + v2.getWidth() / 2;
         v2y = v2.getLayoutY() + v2.getHeight() / 2;
 
-        processaCoordenadas();
+        //processaCoordenadas();
         /*if (v1x > v2x)
         {
             v1x -= v1.getWidth();
