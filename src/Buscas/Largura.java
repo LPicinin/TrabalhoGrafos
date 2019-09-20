@@ -19,6 +19,15 @@ import java.util.Queue;
  */
 public class Largura extends Busca
 {
+
+    public Largura()
+    {
+    }
+
+    public Largura(List<List<String>> la)
+    {
+        super(la);
+    }
     @Override
     protected void buscaPriv()
     {

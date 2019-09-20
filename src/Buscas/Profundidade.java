@@ -18,6 +18,15 @@ import java.util.Stack;
 public class Profundidade extends Busca
 {
 
+    public Profundidade()
+    {
+    }
+
+    public Profundidade(List<List<String>> la)
+    {
+        super(la);
+    }
+
     @Override
     protected void buscaPriv()
     {

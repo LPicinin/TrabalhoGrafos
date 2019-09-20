@@ -188,7 +188,6 @@ public class Vertice extends Button
     }
     private void iniciaInfos()
     {
-        
         setFocusTraversable(false);
         /*setStyle("-fx-padding: 10;\n"
                 + "-fx-background-color: gray;\n"

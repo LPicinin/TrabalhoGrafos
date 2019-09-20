@@ -22,18 +22,17 @@ public abstract class Busca
 
     protected final Color[] c = new Color[]
     {
-        Color.color(1, 0, 0), 
-        Color.color(0, 1, 0), 
-        Color.color(0, 0, 1), 
-        Color.color(0, 1, 1), 
+        Color.color(1, 0, 0),
+        Color.color(0, 1, 0),
+        Color.color(0, 0, 1),
+        Color.color(0, 1, 1),
         Color.color(1, 0, 1),
-        
         Color.color(0.5, 0, 0),
         Color.color(0, 0.5, 0),
         Color.color(0, 0, 0.5),
         Color.color(0, 0.5, 0.5),
         Color.color(0.5, 0, 0.5),
-        
+
     };
     protected Color[] coresV;
     protected Tree arv;
@@ -43,6 +42,13 @@ public abstract class Busca
     public Busca()
     {
         arv = new Tree();
+    }
+
+    public Busca(List<List<String>> la)
+    {
+        coresV = new Color[eb.size() + 1];
+        arv = new Tree();
+        eb = converteEstrutura(la);
     }
 
     public final void buscar(List<List<String>> la)
@@ -143,19 +149,36 @@ public abstract class Busca
             if (i < lista_Aux.size())
             {
                 lista_Aux = getlistForIndex(lista_Aux.get(i).getValue());
-                if(aux.getInfo() == 'C')
-                    System.out.println("hum");
                 Color nc = getCorNaoListada(lista_Aux);
                 lista_Aux.get(0).setCor(nc);
                 coresV[lista_Aux.get(0).getValue()] = nc;
                 pilha.push(lista_Aux.get(0));
-            }
-            else
+            } else
             {
                 pilha.pop();
             }
 
         }
+    }
+
+    public String[][] getMatrizColoracao()
+    {
+        String[][] m = new String[coresV.length][this.eb.size()];
+        String []corNegada;
+        List<Color> lc;
+        List<Color> lc2 = Arrays.asList(c);
+        
+        int index;
+        for (int j = 0; j < eb.size(); j++)
+        {
+            lc = getCoresNeg(eb.get(j).get(0).getValue());
+            for (Color color : lc)
+            {
+                index =  lc2.indexOf(color);
+                m[index][j] = Integer.toString(index);
+            }
+        }
+        return m;
     }
 
     private List<No> getlistForIndex(int index)
@@ -172,8 +195,10 @@ public abstract class Busca
             if (coresV[no.getValue()] != null)
             {
                 index = cores.indexOf(coresV[no.getValue()]);
-                if(index >= 0)
+                if (index >= 0)
+                {
                     cores.remove(index);
+                }
             }
         }
         return cores.get(0);
@@ -182,6 +207,19 @@ public abstract class Busca
     public Color[] getCoresV()
     {
         return coresV;
+    }
+
+    private List<Color> getCoresNeg(int j)
+    {
+        List<Color> corn = new ArrayList<>();
+        List<No> listAux = getlistForIndex(j);
+        List<No> listAux2;
+        for (int i = 1; i < listAux.size(); i++)
+        {
+            listAux2 = getlistForIndex(listAux.get(0).getValue());
+            corn.add(listAux2.get(0).getCor());
+        }
+        return corn;
     }
 
 }
