@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import trabalhografos.TelaPrincipalController;
 
 /**
  *
@@ -45,7 +46,7 @@ public class Largura extends Busca
         vizitados[mElementos.get(0).getValue()] = true;
         arv.init(new Node(mElementos.get(0).getValue()));
         //Integer proximoGrafo = null;
-        while (!fila.isEmpty() /*&& (proximoGrafo = getPGrafo()) == null*/)
+        while (!fila.isEmpty()/*&& (proximoGrafo = getPGrafo()) == null*/)
         {
             /*if(fila.isEmpty())
             {
