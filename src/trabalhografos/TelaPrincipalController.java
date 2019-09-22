@@ -1,9 +1,7 @@
 package trabalhografos;
 
 import Buscas.Busca;
-import Buscas.Estrutura.Node;
 import Buscas.Largura;
-import Buscas.Profundidade;
 import Classes.Aresta;
 import Classes.Grafo;
 import Classes.Recursao;
@@ -255,40 +253,47 @@ public class TelaPrincipalController implements Initializable
             verifica_Tipo(ma, mi, la);
 
             ///////////////////matriz de articulação
-            //if (vertices.size() >= 6 && arestas.size() >= 8)
-            Busca b = new Largura();
             try
             {
-                b.buscar(la);
-                b.processaCoresBusca();
-
-                vertices.sort((t, t1) ->
+                if (arestas.size() > 0)
                 {
-                    return Character.compare(t.getText().charAt(0), t1.getText().charAt(0));
-                });
+                    Busca b = new Largura();
+                    b.buscar(la);
+                    b.processaCoresBusca();
 
-                Color[] cores = b.getCoresV();
-                for (int i = 0; i < vertices.size(); i++)
-                {
-                    if (cores[i] != null)
+                    vertices.sort((t, t1) ->
                     {
-                        vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
+                        return Character.compare(t.getText().charAt(0), t1.getText().charAt(0));
+                    });
+
+                    Color[] cores = b.getCoresV();
+                    for (int i = 0; i < vertices.size(); i++)
+                    {
+                        if (cores[i] != null)
+                        {
+                            vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
+                        }
+                        else
+                        {
+                            vertices.get(i).setStyle("");
+                        }
                     }
+                    String []sa = Arrays.deepToString(b.getMatrizColoracao()).replace("[[", "").replace("]]", "").split("\\], \\[");
+                    //String sa[] = Arrays.deepToString(b.getMatriz()).replace("[[", "").replace("]]", "").split("\\], \\[");
+                    saidaMA = "";
+                    for (int i = 0; i < sa.length; i++)
+                    {
+                        saidaMA += "[" + lr.get(i) + "]\t" + sa[i];
+                        saidaMA += "\n";
+                    }
+                    stxColoracao.setText(saidaMA);
                 }
 
             } catch (Exception ex)
             {
                 System.out.println(ex.getCause());
             }
-            
-            String sa[] = Arrays.deepToString(b.getMatriz()).replace("[[", "").replace("]]", "").split("\\], \\[");
-            saidaMA = "";
-            for (int i = 0; i < sa.length; i++)
-            {
-                saidaMA += "[" + lr.get(i) + "]\t" + sa[i];
-                saidaMA += "\n";
-            }
-            stxColoracao.setText(saidaMA);
+
         } catch (Exception ex)
         {
             System.out.println(ex.getCause());
