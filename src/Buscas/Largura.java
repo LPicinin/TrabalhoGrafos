@@ -44,7 +44,7 @@ public class Largura extends Busca
         fila.add(mElementos.get(0));
         //possivel erro
         vizitados[mElementos.get(0).getValue()] = true;
-        arv.init(new Node(mElementos.get(0).getValue()));
+        arv.init(new Node(mElementos.get(0).getValue(), 0));
         //Integer proximoGrafo = null;
         while (!fila.isEmpty()/*&& (proximoGrafo = getPGrafo()) == null*/)
         {
@@ -64,7 +64,7 @@ public class Largura extends Busca
                     vizitados[listaAux.get(i).getValue()] = true;
                     
                     Node pai = arv.busca(aux.getValue());
-                    arv.insereFilho(pai, listaAux.get(i).getValue());
+                    arv.insereFilho(pai, listaAux.get(i).getValue(), 0);
                     
                     fila.add(listaAux.get(i));
                 }

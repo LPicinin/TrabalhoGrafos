@@ -41,17 +41,17 @@ public class Tree
         raiz = n;
     }
 
-    public void insereFilho(Node pai, int info)
+    public void insereFilho(Node pai, int info, int c)
     {
         Node n;
         if (pai != null)
         {
-            n = new Node(info);
+            n = new Node(info, c);
             n.setPai(pai);
             pai.getFilhos().add(n);
         } else
         {
-            raiz = new Node(info);
+            raiz = new Node(info, c);
         }
     }
 
@@ -90,7 +90,7 @@ public class Tree
     public void processaPremiums()
     {
         List<Node> folhas = getFolhas();
-
+        inOrdem(raiz);
     }
 
     public void processaCores(int tl_vertice)
@@ -155,14 +155,15 @@ public class Tree
 
     private void inOrdem(Node r)
     {
+        int menorNo;
         if (r != null)
         {
             for (Node filho : r.getFilhos())
             {
                 inOrdem(filho);
-                //executa
             }
-            inOrdem(r.getFilhos().get(r.getFilhos().size() - 1));
+            if(r.getFilhos().size() > 0)
+                inOrdem(r.getFilhos().get(r.getFilhos().size() - 1));
         }
     }
 
@@ -197,6 +198,57 @@ public class Tree
     public Color[] getCr()
     {
         return cr;
+    }
+
+    public void processaLigacoesOciosas(List<List<No>> eb)
+    {
+        Node aux;
+        Node aux2;
+        Node filho;
+        boolean achou;
+        int  i;
+        for (List<No> list : eb)
+        {
+            aux = busca(list.get(0).getValue());
+            achou = true;
+            for (i = 1; i < list.size() && achou; i++)
+            {
+                achou = !(list.get(i).getValue()== aux.getInfo());
+                for (int j = 0; j < aux.getFilhos().size(); j++)
+                {
+                    filho = aux.getFilhos().get(j);
+                    achou = !(list.get(i).getValue() == filho.getInfo());
+                }
+            }
+            if(i < list.size())
+            {
+                aux2 = busca(list.get(i).getValue());
+                aux.setPremium(aux2.getInfo(), 1);
+                aux2.setPremium(aux.getInfo(), 1);
+            }
+            else
+            {
+                aux.setPremium(null, 1);
+            }
+        }
+    }
+
+    public List<Integer[]> getPremiums()
+    {
+        List<Integer[]> prem = new ArrayList<>();
+        Queue<Node> fila = new LinkedList<>();
+        Node aux;
+        fila.add(raiz);
+        while(!fila.isEmpty())
+        {
+            aux = fila.remove();
+            prem.add(aux.getPremium());
+            for (Node filho : aux.getFilhos())
+            {
+                fila.add(filho);
+            }
+        }
+        return prem;
     }
 
 }

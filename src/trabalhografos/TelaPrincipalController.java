@@ -2,6 +2,7 @@ package trabalhografos;
 
 import Buscas.Busca;
 import Buscas.Largura;
+import Buscas.Profundidade;
 import Classes.Aresta;
 import Classes.Grafo;
 import Classes.Recursao;
@@ -92,6 +93,7 @@ public class TelaPrincipalController implements Initializable
     private static Label slblGrauRegular;
     @FXML
     private JFXTextArea txArticulacao;
+    private static JFXTextArea stxArticulacao;
     @FXML
     private JFXTextArea txColoracao;
     private static JFXTextArea stxColoracao;
@@ -119,6 +121,7 @@ public class TelaPrincipalController implements Initializable
         simgvSimples = imgvSimples;
 
         stxColoracao = txColoracao;
+        stxArticulacao = txArticulacao;
         slblGrauRegular = lblGrauRegular;
         slblKCompleto = lblKCompleto;
         sequencia = 0;
@@ -272,13 +275,12 @@ public class TelaPrincipalController implements Initializable
                         if (cores[i] != null)
                         {
                             vertices.get(i).setStyle("-fx-background-color: rgb(" + cores[i].getRed() * 255 + "," + cores[i].getGreen() * 255 + "," + cores[i].getBlue() * 255 + ")");
-                        }
-                        else
+                        } else
                         {
                             vertices.get(i).setStyle("");
                         }
                     }
-                    String []sa = Arrays.deepToString(b.getMatrizColoracao()).replace("[[", "").replace("]]", "").split("\\], \\[");
+                    String[] sa = Arrays.deepToString(b.getMatrizColoracao()).replace("[[", "").replace("]]", "").split("\\], \\[");
                     //String sa[] = Arrays.deepToString(b.getMatriz()).replace("[[", "").replace("]]", "").split("\\], \\[");
                     saidaMA = "";
                     for (int i = 0; i < sa.length; i++)
@@ -293,10 +295,23 @@ public class TelaPrincipalController implements Initializable
             {
                 System.out.println(ex.getCause());
             }
+            if (arestas.size() > 3)
+            {
+                Busca b = new Profundidade();
+                b.buscar(la);
+                b.getArv().processaPremiums();
+                List<Integer[]> li = b.getPremiums();
+                String saidaArt = "";
+                for (Integer[] premiums : li)
+                {
+                    saidaArt += Arrays.toString(premiums)+"\n";
+                }
+                stxArticulacao.setText(saidaArt);
+            }
 
         } catch (Exception ex)
         {
-            System.out.println(ex.getCause());
+            System.out.println(ex.toString());
         }
     }
 

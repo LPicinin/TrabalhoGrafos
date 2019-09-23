@@ -32,7 +32,7 @@ public class Profundidade extends Busca
     {
         Stack<No> pilha = new Stack<>();
         No aux;
-        int value, i;
+        int value, i, c = 0;
         List<No> listaAux;
         boolean[] vizitados = new boolean[maiorVertice + 1];
         Arrays.fill(vizitados, false);
@@ -41,7 +41,7 @@ public class Profundidade extends Busca
         pilha.push(mElementos.get(0));//primeio nó da busca
         //possivel erro
         vizitados[mElementos.get(0).getValue()] = true;
-        arv.init(new Node(mElementos.get(0).getValue()));
+        arv.init(new Node(mElementos.get(0).getValue(), c++));
         
         while (!pilha.isEmpty())
         {
@@ -57,10 +57,11 @@ public class Profundidade extends Busca
             {
                 vizitados[listaAux.get(i).getValue()] = true;
                 Node pai = arv.busca(aux.getValue());
-                arv.insereFilho(pai, listaAux.get(i).getValue());
+                arv.insereFilho(pai, listaAux.get(i).getValue(), c++);
                 pilha.add(listaAux.get(i));
             }
         }
+        arv.processaLigacoesOciosas(this.eb);
     }
 
 }

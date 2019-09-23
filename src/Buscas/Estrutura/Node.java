@@ -6,6 +6,7 @@
 package Buscas.Estrutura;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.scene.paint.Color;
 
@@ -22,11 +23,12 @@ public class Node
     private Integer[] premium;
     private Color cor;
 
-    public Node(int info)
+    public Node(int info, int c)
     {
         this.info = info;
         filhos = new ArrayList<>();
         premium = new Integer[3];
+        premium[0] = c;
     }
 
     public int getInfo()
@@ -49,28 +51,64 @@ public class Node
         this.filhos = filhos;
     }
 
-    public Node getPai() {
+    public Node getPai()
+    {
         return pai;
     }
 
-    public void setPai(Node pai) {
+    public void setPai(Node pai)
+    {
         this.pai = pai;
     }
 
-    public Integer getPremium(int index) {
+    public Integer getPremium(int index)
+    {
         return premium[index];
     }
 
-    public void setPremium(Integer premium, int index) {
+    public void setPremium(Integer premium, int index)
+    {
         this.premium[index] = premium;
     }
 
-    public Color getCor() {
+    public Color getCor()
+    {
         return cor;
     }
 
-    public void setCor(Color cor) {
+    public void setCor(Color cor)
+    {
         this.cor = cor;
     }
 
+    public Integer[] getPremium()
+    {
+        return premium;
+    }
+    public boolean isFolha()
+    {
+        return filhos.isEmpty();
+    }
+    public Integer getMenor()
+    {
+        /*
+        Integer menor = Arrays.stream(premium).min((o1, o2) ->
+        {
+            if (o1 != null && o2 != null)
+            {
+                return (o1 < o2) ? o1 : o2;
+            }
+            return (o1 == null) ? o2 : o1;
+        }).get();
+        */
+        Integer menor = null;
+        for (Integer n : premium)
+        {
+            if(menor == null || n < menor)
+            {
+                menor = n;
+            }
+        }
+        return menor;
+    }
 }

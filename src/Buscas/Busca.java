@@ -54,6 +54,7 @@ public abstract class Busca
 
     public final void buscar(List<List<String>> la)
     {
+        
         eb = converteEstrutura(la);
         buscaPriv();
         coresV = new Color[eb.size() + 1];
@@ -271,6 +272,11 @@ public abstract class Busca
     public int[][] getMatriz()
     {
         return matriz;
+    }
+
+    public List<Integer[]> getPremiums()
+    {
+        return arv.getPremiums();
     }
 
 }
