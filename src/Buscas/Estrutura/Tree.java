@@ -90,7 +90,7 @@ public class Tree
     public void processaPremiums()
     {
         List<Node> folhas = getFolhas();
-        inOrdem(raiz);
+        postOrder(raiz);
     }
 
     public void processaCores(int tl_vertice)
@@ -166,6 +166,25 @@ public class Tree
                 inOrdem(r.getFilhos().get(r.getFilhos().size() - 1));
         }
     }
+    private void postOrder(Node r)
+    {
+        int m = 11;
+        if(r != null)
+        {
+            for (int i = r.getFilhos().size()-1; i > 0; i--)
+            {
+                postOrder(r.getFilhos().get(i));
+                if(r.getFilhos().get(i).getMenor() < m)
+                    m = r.getFilhos().get(i).getMenor();
+            }
+            if(r.getMenor() < m)
+                m = r.getMenor();
+            r.setPremium(m, 2);
+            if(r.getFilhos().size() > 0)
+                postOrder(r.getFilhos().get(r.getFilhos().size()-1));
+        }
+
+    }
 
     private List<Node> getFolhas()
     {
@@ -213,7 +232,7 @@ public class Tree
             achou = true;
             for (i = 1; i < list.size() && achou; i++)
             {
-                achou = !(list.get(i).getValue()== aux.getInfo());
+                //achou = !(list.get(i).getValue()== aux.getInfo());
                 for (int j = 0; j < aux.getFilhos().size(); j++)
                 {
                     filho = aux.getFilhos().get(j);
@@ -225,11 +244,11 @@ public class Tree
                 aux2 = busca(list.get(i).getValue());
                 aux.setPremium(aux2.getInfo(), 1);
                 aux2.setPremium(aux.getInfo(), 1);
-            }
+            }/*
             else
             {
                 aux.setPremium(null, 1);
-            }
+            }*/
         }
     }
 

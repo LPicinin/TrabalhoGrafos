@@ -27,7 +27,7 @@ public class Node
     {
         this.info = info;
         filhos = new ArrayList<>();
-        premium = new Integer[3];
+        premium = new Integer[4];
         premium[0] = c;
     }
 
@@ -85,26 +85,25 @@ public class Node
     {
         return premium;
     }
+
     public boolean isFolha()
     {
         return filhos.isEmpty();
     }
+
     public Integer getMenor()
     {
         /*
-        Integer menor = Arrays.stream(premium).min((o1, o2) ->
+        return Arrays.stream(premium).min((o1, o2) ->
         {
-            if (o1 != null && o2 != null)
-            {
-                return (o1 < o2) ? o1 : o2;
-            }
-            return (o1 == null) ? o2 : o1;
+            return Integer.compare(o1, o2);
         }).get();
-        */
-        Integer menor = null;
+         */
+
+        Integer menor = 11;
         for (Integer n : premium)
         {
-            if(menor == null || n < menor)
+            if (n != null && n < menor)
             {
                 menor = n;
             }
