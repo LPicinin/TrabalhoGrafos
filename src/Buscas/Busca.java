@@ -215,6 +215,17 @@ public abstract class Busca
                 m[j][in] = 0;
             }
         }
+        int j;
+        boolean flag = true;
+        for (int i = 0; i < m.length; i++)
+        {
+            for (j = 0; j < m[0].length && m[i][j] == 1 && flag; j++)
+            {
+                m[i][j] = 0;
+            }
+            m[i][j] = 1;
+            
+        }
         return m;
     }
 
